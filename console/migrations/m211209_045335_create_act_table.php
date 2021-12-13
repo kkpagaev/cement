@@ -14,8 +14,8 @@ class m211209_045335_create_act_table extends Migration
     {
         $this->createTable('{{%act}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer()->notNull(),
-            'contract_id' => $this->integer()->notNull(),
+            'user_id' => $this->bigInteger()->notNull(),
+            'contract_id' => $this->bigInteger()->notNull(),
             'number' => $this->integer(),
             'data_from' => $this->date(),
             'data_to' => $this->date(),
