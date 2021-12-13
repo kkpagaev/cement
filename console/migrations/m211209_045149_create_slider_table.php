@@ -3,22 +3,21 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%news}}`.
+ * Handles the creation of table `{{%slider}}`.
  */
-class m211209_045103_create_news_table extends Migration
+class m211209_045149_create_slider_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%news}}', [
+        $this->createTable('{{%slider}}', [
             'id' => $this->bigPrimaryKey(),
             'title' => $this->string()->notNull(),
             'subtitle' => $this->string()->notNull(),
             'link' => $this->string()->notNull(),
-            'image_filepath' => $this->string(),
-            'timestamp' => $this->datetime()->notNull(),
+            'image_filepath' => $this->string()
         ]);
     }
 
@@ -27,6 +26,6 @@ class m211209_045103_create_news_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%news}}');
+        $this->dropTable('{{%slider}}');
     }
 }
