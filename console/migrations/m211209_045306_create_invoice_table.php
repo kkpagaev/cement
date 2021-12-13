@@ -15,12 +15,12 @@ class m211209_045306_create_invoice_table extends Migration
         $this->createTable('{{%invoice}}', [
             'id' => $this->bigPrimaryKey(),
             // ASK MARK!!!
-            'status' => $this->tinyInteger(),
+            'status' => $this->tinyInteger()->defaultValue(0),
             'user_id' => $this->bigInteger()->notNull(),
-            'number' => $this->integer(),
+            'number' => $this->integer()->notNull(),
             // MARK!!!
-            'data' => $this->date(),
-            'filepath' => $this->string(),
+            'data' => $this->date()->notNull(),
+            'filepath' => $this->string()->notNull(),
             // doesn't have a cement mark
         ]);
         $this->addForeignKey('invoice-user_id', 'invoice', 'user_id', 'user', 'id');

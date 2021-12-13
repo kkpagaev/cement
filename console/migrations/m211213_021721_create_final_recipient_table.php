@@ -14,7 +14,7 @@ class m211213_021721_create_final_recipient_table extends Migration
     {
         $this->createTable('{{%final_recipient}}', [
             'id' => $this->bigPrimaryKey(),
-            'fullname' => $this->string(),
+            'fullname' => $this->string()->notNull(),
         ]);
     }
 

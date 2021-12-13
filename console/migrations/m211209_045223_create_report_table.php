@@ -15,9 +15,9 @@ class m211209_045223_create_report_table extends Migration
         $this->createTable('{{%report}}', [
             'id' => $this->bigPrimaryKey(),
             // ASK MARK!!!
-            'status' => $this->tinyInteger(),
+            'status' => $this->tinyInteger()->defaultValue(0),
             'user_id' => $this->bigInteger()->notNull(),
-            'filepath' => $this->string()
+            'filepath' => $this->string()->notNull()
         ]);
         $this->addForeignKey('report-user_id', 'report', 'user_id', 'user', 'id');
     }

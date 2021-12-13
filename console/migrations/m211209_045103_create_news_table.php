@@ -17,7 +17,7 @@ class m211209_045103_create_news_table extends Migration
             'title' => $this->string()->notNull(),
             'subtitle' => $this->string()->notNull(),
             'link' => $this->string()->notNull(),
-            'image_filepath' => $this->string(),
+            'image_filepath' => $this->string()->notNull(),
             'timestamp' => $this->datetime()->notNull(),
         ]);
     }

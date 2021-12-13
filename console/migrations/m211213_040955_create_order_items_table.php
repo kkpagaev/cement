@@ -23,9 +23,9 @@ class m211213_040955_create_order_items_table extends Migration
         */
         $this->createTable('{{%order_items}}', [
             'id' => $this->primaryKey(),
-            'order_id' => $this->bigInteger(),
-            'product_id' => $this->bigInteger(),
-            'weight' => $this->integer(),
+            'order_id' => $this->bigInteger()->notNull(),
+            'product_id' => $this->bigInteger()->notNull(),
+            'weight' => $this->integer()->notNull(),
             'order_date' => $this->date(),
             'order_time' => $this->time(),
 

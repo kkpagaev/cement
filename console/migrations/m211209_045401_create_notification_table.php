@@ -22,10 +22,10 @@ class m211209_045401_create_notification_table extends Migration
         $this->createTable('{{%notification}}', [
             'id' => $this->bigPrimaryKey(),
             'user_id' => $this->bigInteger()->notNull(),
-            'is_read' => $this->boolean(),
-            'title' => $this->string(),
-            'description' => $this->string(),
-            'timestamp' => $this->datetime(),
+            'is_read' => $this->boolean()->defaultValue(false),
+            'title' => $this->string()->notNull(),
+            'description' => $this->string()->notNull(),
+            'timestamp' => $this->datetime()->notNull(),
         ]);
         $this->addForeignKey('notification-user_id', 'notification', 'user_id', 'user', 'id');
 

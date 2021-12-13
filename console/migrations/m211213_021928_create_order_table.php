@@ -14,7 +14,7 @@ class m211213_021928_create_order_table extends Migration
     {
         $this->createTable('{{%order}}', [
             'id' => $this->bigPrimaryKey(),
-            'status' => $this->tinyInteger(),
+            'status' => $this->tinyInteger()->notNull(),
             'user_id' => $this->bigInteger()->notNull(),
             'delivery_type' => $this->tinyInteger()->notNull(),
             'contract_id' => $this->bigInteger()->notNull(),
@@ -35,7 +35,7 @@ class m211213_021928_create_order_table extends Migration
             'destination_station' => $this->string(1000),
             'consignee_branch' => $this->string(1000),
             'columnt_7' => $this->string(1000),
-            'invoice_needed' => $this->tinyInteger(1),
+            'invoice_needed' => $this->tinyInteger(1)->notNull(),
 
         ]);
         $this->addForeignKey('order-user_id', 'order', 'user_id', 'user', 'id');

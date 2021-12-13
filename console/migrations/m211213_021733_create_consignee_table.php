@@ -14,7 +14,7 @@ class m211213_021733_create_consignee_table extends Migration
     {
         $this->createTable('{{%consignee}}', [
             'id' => $this->bigPrimaryKey(),
-            'fullname' => $this->string(),
+            'fullname' => $this->string()->notNull(),
 
         ]);
     }

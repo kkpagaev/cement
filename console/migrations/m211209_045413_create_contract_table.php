@@ -15,7 +15,7 @@ class m211209_045413_create_contract_table extends Migration
         $this->createTable('{{%contract}}', [
             'id' => $this->bigPrimaryKey(),
             'user_id' => $this->bigInteger()->notNull(),
-            'data_from' => $this->date(),
+            'data_from' => $this->date()->notNull(),
         ]);
         $this->addForeignKey('contract-user_id', 'contract', 'user_id', 'user', 'id');
 

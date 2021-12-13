@@ -15,8 +15,8 @@ class m211209_045449_create_shipping_address_table extends Migration
         $this->createTable('{{%shipping_address}}', [
             'id' => $this->bigPrimaryKey(),
             'user_id' => $this->bigInteger()->notNull(),
-            'city' => $this->string(),
-            'address' => $this->string(),
+            'city' => $this->string()->notNull(),
+            'address' => $this->string()->notNull(),
         ]);
         $this->addForeignKey('shipping_address-user_id', 'shipping_address', 'user_id', 'user', 'id');
     }
