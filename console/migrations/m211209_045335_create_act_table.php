@@ -13,10 +13,9 @@ class m211209_045335_create_act_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%act}}', [
-            'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger()->notNull(),
-            // add contract fk MARK!!!
-            'contract_id' => $this->bigInteger()->notNull(),
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),
+            'contract_id' => $this->integer()->notNull(),
             'number' => $this->integer(),
             'data_from' => $this->date(),
             'data_to' => $this->date(),
