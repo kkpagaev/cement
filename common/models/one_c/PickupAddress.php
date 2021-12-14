@@ -1,25 +1,30 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
- * This is the model class for table "consignee".
+ * This is the model class for table "pickup_address".
  *
  * @property int $id
- * @property string $fullname
+ * @property string $address
  *
  * @property Order[] $orders
  */
-class Consignee extends \yii\db\ActiveRecord
+class PickupAddress extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 7;
+    }
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'consignee';
+        return 'pickup_address';
     }
 
     /**
@@ -28,8 +33,8 @@ class Consignee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fullname'], 'required'],
-            [['fullname'], 'string', 'max' => 255],
+            [['address'], 'required'],
+            [['address'], 'string', 'max' => 255],
         ];
     }
 
@@ -40,7 +45,7 @@ class Consignee extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fullname' => 'Fullname',
+            'address' => 'Address',
         ];
     }
 
@@ -51,6 +56,6 @@ class Consignee extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::class, ['consignee_id' => 'id']);
+        return $this->hasMany(Order::class, ['pickup_address_id' => 'id']);
     }
 }

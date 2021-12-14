@@ -1,25 +1,30 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
- * This is the model class for table "wagon_type".
+ * This is the model class for table "product".
  *
  * @property int $id
  * @property string $title
  *
  * @property OrderItems[] $orderItems
  */
-class WagonType extends \yii\db\ActiveRecord
+class Product extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 8;
+    }
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'wagon_type';
+        return 'product';
     }
 
     /**
@@ -51,6 +56,6 @@ class WagonType extends \yii\db\ActiveRecord
      */
     public function getOrderItems()
     {
-        return $this->hasMany(OrderItems::class, ['wagon_type_id' => 'id']);
+        return $this->hasMany(OrderItems::class, ['product_id' => 'id']);
     }
 }

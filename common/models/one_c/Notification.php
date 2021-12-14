@@ -1,7 +1,8 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
@@ -16,8 +17,12 @@ use Yii;
  *
  * @property User $user
  */
-class Notification extends \yii\db\ActiveRecord
+class Notification extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 4;
+    }
     /**
      * {@inheritdoc}
      */

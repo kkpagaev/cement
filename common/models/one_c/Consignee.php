@@ -1,25 +1,30 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
- * This is the model class for table "final_recipient".
+ * This is the model class for table "consignee".
  *
  * @property int $id
  * @property string $fullname
  *
  * @property Order[] $orders
  */
-class FinalRecipient extends \yii\db\ActiveRecord
+class Consignee extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 13;
+    }
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'final_recipient';
+        return 'consignee';
     }
 
     /**
@@ -51,6 +56,6 @@ class FinalRecipient extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::class, ['final_recipient_id' => 'id']);
+        return $this->hasMany(Order::class, ['consignee_id' => 'id']);
     }
 }

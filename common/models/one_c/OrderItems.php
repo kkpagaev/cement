@@ -1,7 +1,8 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
@@ -19,8 +20,12 @@ use Yii;
  * @property Product $product
  * @property WagonType $wagonType
  */
-class OrderItems extends \yii\db\ActiveRecord
+class OrderItems extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 11;
+    }
     /**
      * {@inheritdoc}
      */

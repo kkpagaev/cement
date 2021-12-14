@@ -1,28 +1,33 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
- * This is the model class for table "contract".
+ * This is the model class for table "shipping_address".
  *
  * @property int $id
  * @property int $user_id
- * @property string $data_from
+ * @property string $city
+ * @property string $address
  *
- * @property Act[] $acts
  * @property Order[] $orders
  * @property User $user
  */
-class Contract extends \yii\db\ActiveRecord
+class ShippingAddress extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 6;
+    }
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'contract';
+        return 'shipping_address';
     }
 
     /**
@@ -31,9 +36,9 @@ class Contract extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'data_from'], 'required'],
+            [['user_id', 'city', 'address'], 'required'],
             [['user_id'], 'integer'],
-            [['data_from'], 'safe'],
+            [['city', 'address'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -46,18 +51,9 @@ class Contract extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'data_from' => 'Data From',
+            'city' => 'City',
+            'address' => 'Address',
         ];
-    }
-
-    /**
-     * Gets query for [[Acts]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActs()
-    {
-        return $this->hasMany(Act::class, ['contract_id' => 'id']);
     }
 
     /**
@@ -67,7 +63,7 @@ class Contract extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::class, ['contract_id' => 'id']);
+        return $this->hasMany(Order::class, ['shipment_point_id' => 'id']);
     }
 
     /**

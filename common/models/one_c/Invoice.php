@@ -1,27 +1,34 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
- * This is the model class for table "report".
+ * This is the model class for table "invoice".
  *
  * @property int $id
  * @property int|null $status
  * @property int $user_id
+ * @property int $number
+ * @property string $data
  * @property string $filepath
  *
  * @property User $user
  */
-class Report extends \yii\db\ActiveRecord
+class Invoice extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 2;
+    }
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'report';
+        return 'invoice';
     }
 
     /**
@@ -30,8 +37,9 @@ class Report extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'user_id'], 'integer'],
-            [['user_id', 'filepath'], 'required'],
+            [['status', 'user_id', 'number'], 'integer'],
+            [['user_id', 'number', 'data', 'filepath'], 'required'],
+            [['data'], 'safe'],
             [['filepath'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -46,6 +54,8 @@ class Report extends \yii\db\ActiveRecord
             'id' => 'ID',
             'status' => 'Status',
             'user_id' => 'User ID',
+            'number' => 'Number',
+            'data' => 'Data',
             'filepath' => 'Filepath',
         ];
     }

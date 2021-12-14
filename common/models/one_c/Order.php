@@ -1,7 +1,8 @@
 <?php
 
-namespace common\models;
+namespace common\models\one_c;
 
+use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
 /**
@@ -38,8 +39,12 @@ use Yii;
  * @property ShippingAddress $shipmentPoint
  * @property User $user
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends Bridgeable1CActiveRecord
 {
+    function getModelType(): int
+    {
+        return 0;
+    }
     /**
      * {@inheritdoc}
      */
