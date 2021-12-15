@@ -12,6 +12,12 @@ class m211213_070207_create_import_table extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%import}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->string()->notNull(),
@@ -19,7 +25,7 @@ class m211213_070207_create_import_table extends Migration
             'model_id' => $this->bigInteger(),
             'action' => $this->tinyInteger()->notNull(),
             'data' => $this->text(),
-        ]);
+        ], $tableOptions);
 
     }
 

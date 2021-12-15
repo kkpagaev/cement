@@ -12,15 +12,12 @@ class m211213_040955_create_order_items_table extends Migration
      */
     public function safeUp()
     {
-        /*
-        id - bigint ідентифікатор
-        order_id - bigin FK order->id
-        product_id – bigint FK product->id
-        weight – int вага
-        order_date - OPTIONAL date дата доставки замовлення
-        order_time - OPTIONAL time час доставки замовлення
-        wagon_type_id – OPTIONAL bigint FK wagon->id
-        */
+        $tableOptions = null;
+
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%order_items}}', [
             'id' => $this->primaryKey(),
             'order_id' => $this->bigInteger()->notNull(),
@@ -31,7 +28,7 @@ class m211213_040955_create_order_items_table extends Migration
 
             'wagon_type_id' => $this->bigInteger(),
 
-        ]);
+        ], $tableOptions );
         $this->addForeignKey('order_items-order_id', 'order_items', 'order_id', 'order', 'id');
         $this->addForeignKey('order_items-product_id', 'order_items', 'product_id', 'product', 'id');
         $this->addForeignKey('order_items-wagon_type_id', 'order_items', 'wagon_type_id', 'wagon_type', 'id');

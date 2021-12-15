@@ -12,6 +12,12 @@ class m211213_021928_create_order_table extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%order}}', [
             'id' => $this->bigPrimaryKey(),
             'status' => $this->tinyInteger()->notNull(),
@@ -37,7 +43,7 @@ class m211213_021928_create_order_table extends Migration
             'columnt_7' => $this->string(1000),
             'invoice_needed' => $this->tinyInteger(1)->notNull(),
 
-        ]);
+        ], $tableOptions);
         $this->addForeignKey('order-user_id', 'order', 'user_id', 'user', 'id');
         $this->addForeignKey('order-contract_id', 'order', 'contract_id', 'contract', 'id');
         $this->addForeignKey('order-pickup_address_id', 'order', 'pickup_address_id', 'pickup_address', 'id');

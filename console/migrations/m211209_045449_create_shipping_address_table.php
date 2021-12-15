@@ -12,12 +12,17 @@ class m211209_045449_create_shipping_address_table extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%shipping_address}}', [
             'id' => $this->bigPrimaryKey(),
             'user_id' => $this->bigInteger()->notNull(),
             'city' => $this->string()->notNull(),
             'address' => $this->string()->notNull(),
-        ]);
+        ], $tableOptions);
         $this->addForeignKey('shipping_address-user_id', 'shipping_address', 'user_id', 'user', 'id');
     }
 

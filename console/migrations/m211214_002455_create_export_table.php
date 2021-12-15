@@ -12,14 +12,11 @@ class m211214_002455_create_export_table extends Migration
      */
     public function safeUp()
     {
-/*        id: integer,
-user_id: string,
-model_type: integer enum,
-model_id: nullable integer,
-action: integer enum(0: create – створити, 1: update – оновити, 2: delete – видалити)
-data: nullable string*/
-
-
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%export}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->string()->notNull(),
@@ -27,7 +24,7 @@ data: nullable string*/
             'model_id' => $this->bigInteger(),
             'action' => $this->tinyInteger()->notNull(),
             'data' => $this->text(),
-        ]);
+        ], $tableOptions);
     }
 
     /**

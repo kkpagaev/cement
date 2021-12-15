@@ -12,13 +12,11 @@ class m211209_045401_create_notification_table extends Migration
      */
     public function safeUp()
     {
-// user_id – bigint user->id користувач договору
-// is_read - boolean - чи прочитав користувач вже (поставити штатну іконку + відображати різні кольори для прочитаного та ні)
-// title - varchar(255) - заголовок
-// description - text - заголовок
-// timestamp - timestamp - коли було сповіщення
-
-
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%notification}}', [
             'id' => $this->bigPrimaryKey(),
             'user_id' => $this->bigInteger()->notNull(),
@@ -26,7 +24,7 @@ class m211209_045401_create_notification_table extends Migration
             'title' => $this->string()->notNull(),
             'description' => $this->string()->notNull(),
             'timestamp' => $this->datetime()->notNull(),
-        ]);
+        ], $tableOptions);
         $this->addForeignKey('notification-user_id', 'notification', 'user_id', 'user', 'id');
 
     }

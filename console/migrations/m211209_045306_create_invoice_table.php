@@ -12,6 +12,11 @@ class m211209_045306_create_invoice_table extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%invoice}}', [
             'id' => $this->bigPrimaryKey(),
             // ASK MARK!!!
@@ -22,7 +27,7 @@ class m211209_045306_create_invoice_table extends Migration
             'data' => $this->date()->notNull(),
             'filepath' => $this->string()->notNull(),
             // doesn't have a cement mark
-        ]);
+        ], $tableOptions);
         $this->addForeignKey('invoice-user_id', 'invoice', 'user_id', 'user', 'id');
     }
 
