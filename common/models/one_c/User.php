@@ -4,6 +4,8 @@ namespace common\models\one_c;
 
 use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
+use yii\db\ActiveQuery;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
@@ -24,9 +26,56 @@ use Yii;
  * @property Report[] $reports
  * @property ShippingAddress[] $shippingAddresses
  */
-class User extends Bridgeable1CActiveRecord
+class User extends Bridgeable1CActiveRecord implements IdentityInterface
 {
     public array $excludeExportAttributes = ['auth_key'];
+
+    /**
+     * Finds an identity by the given ID.
+     *
+     * @param string|int $id the ID to be looked for
+     * @return IdentityInterface|null the identity object that matches the given ID.
+     */
+    public static function findIdentity($id): ?IdentityInterface
+    {
+        return static::findOne($id);
+    }
+
+    /**
+     * Finds an identity by the given token.
+     *
+     * @param string $token the token to be looked for
+     * @return IdentityInterface|null the identity object that matches the given token.
+     */
+    public static function findIdentityByAccessToken($token, $type = null): ?IdentityInterface
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    /**
+     * @return int current user ID
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string|null current user auth key
+     */
+    public function getAuthKey(): ?string
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * @param string $authKey
+     * @return bool|null if auth key is valid for current user
+     */
+    public function validateAuthKey($authKey): ?bool
+    {
+        return $this->getAuthKey() === $authKey;
+    }
 
     function getModelType(): int
     {
@@ -35,7 +84,7 @@ class User extends Bridgeable1CActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user';
     }
@@ -43,7 +92,7 @@ class User extends Bridgeable1CActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['first_name', 'last_name', 'middle_name', 'email', 'password'], 'required'],
@@ -56,7 +105,7 @@ class User extends Bridgeable1CActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -72,9 +121,9 @@ class User extends Bridgeable1CActiveRecord
     /**
      * Gets query for [[Acts]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getActs()
+    public function getActs(): ActiveQuery
     {
         return $this->hasMany(Act::class, ['user_id' => 'id']);
     }
@@ -82,9 +131,9 @@ class User extends Bridgeable1CActiveRecord
     /**
      * Gets query for [[Contracts]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getContracts()
+    public function getContracts(): ActiveQuery
     {
         return $this->hasMany(Contract::class, ['user_id' => 'id']);
     }
@@ -92,9 +141,9 @@ class User extends Bridgeable1CActiveRecord
     /**
      * Gets query for [[Invoices]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getInvoices()
+    public function getInvoices(): ActiveQuery
     {
         return $this->hasMany(Invoice::class, ['user_id' => 'id']);
     }
@@ -102,9 +151,9 @@ class User extends Bridgeable1CActiveRecord
     /**
      * Gets query for [[Notifications]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getNotifications()
+    public function getNotifications(): ActiveQuery
     {
         return $this->hasMany(Notification::class, ['user_id' => 'id']);
     }
@@ -112,9 +161,9 @@ class User extends Bridgeable1CActiveRecord
     /**
      * Gets query for [[Orders]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getOrders()
+    public function getOrders(): ActiveQuery
     {
         return $this->hasMany(Order::class, ['user_id' => 'id']);
     }
@@ -122,9 +171,9 @@ class User extends Bridgeable1CActiveRecord
     /**
      * Gets query for [[Reports]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getReports()
+    public function getReports(): ActiveQuery
     {
         return $this->hasMany(Report::class, ['user_id' => 'id']);
     }
@@ -132,10 +181,15 @@ class User extends Bridgeable1CActiveRecord
     /**
      * Gets query for [[ShippingAddresses]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getShippingAddresses()
+    public function getShippingAddresses(): ActiveQuery
     {
         return $this->hasMany(ShippingAddress::class, ['user_id' => 'id']);
+    }
+
+    public function validatePassword($password): bool
+    {
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 }
