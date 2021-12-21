@@ -26,6 +26,8 @@ use Yii;
  */
 class User extends Bridgeable1CActiveRecord
 {
+    public array $excludeExportAttributes = ['auth_key'];
+
     function getModelType(): int
     {
         return 10;

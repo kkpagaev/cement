@@ -27,11 +27,11 @@ class ApiController extends \yii\web\Controller
     public function actionImport()
     {
         $request = Yii::$app->request;
-        $data = json_decode(($request->post('data')), true);
-
+        $data = json_decode(($request->getRawBody()), true);
         foreach ($data as $modelJson) {
             $import = new Import();
             $import->attributes = $modelJson;
+            $import->data = json_encode($modelJson['data']);
             $import->save();
             $import->process();
         }
@@ -41,8 +41,13 @@ class ApiController extends \yii\web\Controller
     {
         $request = Yii::$app->request;
         $id = $request->get('id');
+        $exports = array_map(function ($export) {
+            $export = $export->toArray();
+            $export['data'] = json_decode($export['data']);
+            return $export;
+        }, Export::find()->where(['>=', 'id', $id])->all());
 
-        return $this->asJson(Export::find()->where(['>=', 'id', $id])->all());
+        return $this->asJson($exports);
     }
 
 
