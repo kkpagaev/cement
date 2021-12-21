@@ -28,7 +28,7 @@ use Yii;
  * @property string|null $consignee_code
  * @property string|null $destination_station
  * @property string|null $consignee_branch
- * @property string|null $columnt_7
+ * @property string|null $column_7
  * @property int $invoice_needed
  *
  * @property Consignee $consignee
@@ -62,7 +62,7 @@ class Order extends Bridgeable1CActiveRecord
             [['status', 'user_id', 'delivery_type', 'contract_id', 'invoice_needed'], 'required'],
             [['status', 'user_id', 'delivery_type', 'contract_id', 'pickup_address_id', 'shipment_point_id', 'consignee_phone', 'final_recipient_id', 'consignee_id', 'invoice_needed'], 'integer'],
             [['consignee_fullname'], 'string', 'max' => 255],
-            [['driver_info', 'consignee_address', 'destination_station', 'consignee_branch', 'columnt_7'], 'string', 'max' => 1000],
+            [['driver_info', 'consignee_address', 'destination_station', 'consignee_branch', 'column_7'], 'string', 'max' => 1000],
             [['driver_car_number', 'driver_car_trailer_number'], 'string', 'max' => 8],
             [['unload_address'], 'string', 'max' => 500],
             [['consignee_edrpou'], 'string', 'max' => 12],
@@ -102,7 +102,7 @@ class Order extends Bridgeable1CActiveRecord
             'consignee_code' => 'Consignee Code',
             'destination_station' => 'Destination Station',
             'consignee_branch' => 'Consignee Branch',
-            'columnt_7' => 'Columnt 7',
+            'column_7' => 'Columnt 7',
             'invoice_needed' => 'Invoice Needed',
         ];
     }

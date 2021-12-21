@@ -82,6 +82,7 @@ class Import extends \yii\db\ActiveRecord
     {
         $modelClass = Export::dataTypes[$this->model_type];
         $model = (new $modelClass)::find()->where(['id' => $this->model_id])->one();
+        if($model == null) return;
         foreach ($this->getData() as $key => $value) {
             $model->{$key} = $value;
         }

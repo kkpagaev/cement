@@ -40,7 +40,7 @@ class m211213_021928_create_order_table extends Migration
             'consignee_code' => $this->string(5),
             'destination_station' => $this->string(1000),
             'consignee_branch' => $this->string(1000),
-            'columnt_7' => $this->string(1000),
+            'column_7' => $this->string(1000),
             'invoice_needed' => $this->tinyInteger(1)->notNull(),
 
         ], $tableOptions);

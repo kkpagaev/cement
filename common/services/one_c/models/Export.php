@@ -67,11 +67,12 @@ class Export extends \yii\db\ActiveRecord
         $export->model_type = $resource->getModelType();
         $export->model_id = $resource->getModelId();
         $export->action = $action;
-        $export->data = json_encode($resource->getModelData());
+        if($action != self::ACTION_DELETE) {
+            $export->data = json_encode($resource->getModelData());
+        }
         $export->save();
         return $export;
     }
-
 
     /**
      * {@inheritdoc}
