@@ -5,8 +5,6 @@ namespace common\models;
 use common\models\one_c\User;
 use Yii;
 use yii\base\Model;
-use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 
 /**
  * Login form

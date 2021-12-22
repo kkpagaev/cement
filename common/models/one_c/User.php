@@ -4,6 +4,7 @@ namespace common\models\one_c;
 
 use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
+use yii\base\Exception;
 use yii\db\ActiveQuery;
 use yii\web\IdentityInterface;
 
@@ -25,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property Order[] $orders
  * @property Report[] $reports
  * @property ShippingAddress[] $shippingAddresses
+ * @property int|null $is_banned
  */
 class User extends Bridgeable1CActiveRecord implements IdentityInterface
 {
@@ -99,6 +101,7 @@ class User extends Bridgeable1CActiveRecord implements IdentityInterface
             [['first_name', 'last_name', 'middle_name', 'email', 'password'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['email'], 'unique'],
+            [['is_banned'], 'boolean'],
         ];
     }
 
@@ -115,6 +118,7 @@ class User extends Bridgeable1CActiveRecord implements IdentityInterface
             'email' => 'Email',
             'auth_key' => 'Auth Key',
             'password' => 'Password',
+            'is_banned' => 'Banned',
         ];
     }
 
@@ -191,5 +195,32 @@ class User extends Bridgeable1CActiveRecord implements IdentityInterface
     public function validatePassword($password): bool
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     * @throws Exception
+     */
+    public function setPassword(string $password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function beforeSave($insert) {
+        if ($this->isAttributeChanged('password')) {
+            $this->setPassword($this->password);
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+    public function beforeUpdate($insert) {
+        if ($this->isAttributeChanged('password')) {
+            $this->setPassword($this->password);
+        }
+
+        return parent::beforeSave($insert);
     }
 }
