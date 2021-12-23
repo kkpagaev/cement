@@ -3,27 +3,24 @@
 namespace common\models;
 
 use Yii;
-use yii\db\ActiveRecord;
-use yii\web\UploadedFile;
 
 /**
- * This is the model class for table "news".
+ * This is the model class for table "slider".
  *
  * @property int $id
  * @property string $title
  * @property string $subtitle
  * @property string $link
  * @property string $image_filepath
- * @property string $timestamp
  */
-class News extends ActiveRecord
+class Slider extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'news';
+        return 'slider';
     }
 
     /**
@@ -32,10 +29,8 @@ class News extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description'], 'required'],
-            [['timestamp'], 'safe'],
-            [['description'], 'string', 'max' => 6534],
-            [['title', 'link', 'image_filepath'], 'string', 'max' => 255],
+            [['title', 'subtitle'], 'required'],
+            [['title', 'subtitle', 'link', 'image_filepath'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,10 +45,6 @@ class News extends ActiveRecord
             'subtitle' => 'Subtitle',
             'link' => 'Link',
             'image_filepath' => 'Image Filepath',
-            'timestamp' => 'Timestamp',
         ];
     }
-
-
-
 }

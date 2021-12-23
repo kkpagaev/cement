@@ -20,7 +20,7 @@ class m211209_045103_create_news_table extends Migration
         $this->createTable('{{%news}}', [
             'id' => $this->bigPrimaryKey(),
             'title' => $this->string()->notNull(),
-            'subtitle' => $this->string()->notNull(),
+            'description' => $this->text()->notNull(),
             'link' => $this->string(),
             'image_filepath' => $this->string()->notNull(),
             'timestamp' => $this->datetime()->defaultExpression('CURRENT_TIMESTAMP'),

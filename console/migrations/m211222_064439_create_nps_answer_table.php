@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%nps_answer}}`.
  */
-class m211209_045204_create_nps_answer_table extends Migration
+class m211222_064439_create_nps_answer_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,10 +17,17 @@ class m211209_045204_create_nps_answer_table extends Migration
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
         }
-        $this->createTable('{{%nps_answer}}', [
+        $table = [
             'id' => $this->bigPrimaryKey(),
-
-        ], $tableOptions);
+            'text_1' => $this->text(),
+            'text_2' => $this->text(),
+        ];
+        $table['question_1'] = $this->smallInteger()->notNull();
+        for ($i = 2; $i <= 30; $i++) {
+            $column = 'question_' . $i;
+            $table[$column] = $this->smallInteger();
+        }
+        $this->createTable('{{%nps_answer}}', $table, $tableOptions);
     }
 
     /**

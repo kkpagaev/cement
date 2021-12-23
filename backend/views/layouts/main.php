@@ -28,15 +28,13 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => "Кривий Ріг Цемент",
+        'brandUrl' => 'Користувачі',
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
@@ -49,6 +47,10 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
+    $menuItems[] =  ['label' => 'Користувачі', 'url' => ['/user']];
+    $menuItems[] =  ['label' => 'Новини', 'url' => ['/news']];
+    $menuItems[] =  ['label' => 'Слайдер', 'url' => ['/slider']];
+    $menuItems[] =  ['label' => 'Статистика NPS', 'url' => ['/nps-answer?date-1=2022-01-01&date-2=2023-01-01']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,

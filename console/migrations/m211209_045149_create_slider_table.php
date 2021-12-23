@@ -21,8 +21,8 @@ class m211209_045149_create_slider_table extends Migration
             'id' => $this->bigPrimaryKey(),
             'title' => $this->string()->notNull(),
             'subtitle' => $this->string()->notNull(),
-            'link' => $this->string()->notNull(),
-            'image_filepath' => $this->string()->notNull()
+            'link' => $this->string(),
+            'image_filepath' => $this->string()
         ], $tableOptions);
     }
 

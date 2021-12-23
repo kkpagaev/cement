@@ -3,14 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\News */
-/* @var $upload common\models\forms\UploadForm */
+/* @var $model common\models\Slider */
 
-$this->title = 'Create News';
-$this->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['index']];
+$this->title = 'Create Slider';
+$this->params['breadcrumbs'][] = ['label' => 'Sliders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="news-create">
+<div class="slider-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -2,9 +2,7 @@
 
 namespace common\models\forms;
 
-use common\models\News;
 use yii\base\Model;
-use yii\db\Expression;
 use yii\web\UploadedFile;
 
 class UploadForm extends Model

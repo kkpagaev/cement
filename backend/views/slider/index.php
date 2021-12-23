@@ -6,15 +6,15 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'News';
+$this->title = 'Sliders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="news-index">
+<div class="slider-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create News', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Slider', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -25,10 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'description',
+            'subtitle',
             'link',
             'image_filepath',
-            //'timestamp',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
