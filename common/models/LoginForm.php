@@ -55,7 +55,7 @@ class LoginForm extends Model
      *
      * @return bool whether the user is logged in successfully
      */
-    public function login()
+    public function login($is_admin = false)
     {
         if ($this->validate()) {
             $user = $this->getUser();
