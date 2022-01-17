@@ -19,11 +19,11 @@ class m211209_045449_create_shipping_address_table extends Migration
         }
         $this->createTable('{{%shipping_address}}', [
             'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger()->notNull(),
-            'city' => $this->string()->notNull(),
-            'address' => $this->string()->notNull(),
+            //'user_id' => $this->bigInteger()->notNull(),
+            'delivery_type' => $this->tinyInteger(),
+            'address_auto' => $this->string(),
         ], $tableOptions);
-        $this->addForeignKey('shipping_address-user_id', 'shipping_address', 'user_id', 'user', 'id');
+       // $this->addForeignKey('shipping_address-user_id', 'shipping_address', 'user_id', 'user', 'id');
     }
 
     /**
@@ -31,7 +31,7 @@ class m211209_045449_create_shipping_address_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('shipping_address-user_id', 'shipping_address');
+       // $this->dropForeignKey('shipping_address-user_id', 'shipping_address');
         $this->dropTable('{{%shipping_address}}');
 
     }
