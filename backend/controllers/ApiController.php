@@ -28,13 +28,20 @@ class ApiController extends \yii\web\Controller
     {
         $request = Yii::$app->request;
         $data = json_decode(($request->getRawBody()), true);
+        $errors = [];
         foreach ($data as $modelJson) {
             $import = new Import();
             $import->attributes = $modelJson;
             $import->data = json_encode($modelJson['data']);
             $import->save();
-            $import->process();
+            if($error = $import->process()) {
+                $errors[] = [
+                    'entity' => $modelJson,
+                    'message' => $error
+                ];
+            }
         }
+        return $this->asJson($errors);
     }
 
     public function actionExport(): \yii\web\Response
