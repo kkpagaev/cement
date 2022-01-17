@@ -9,10 +9,11 @@ use Yii;
  * This is the model class for table "shipping_address".
  *
  * @property int $id
- * @property int $user_id
- * @property string $city
- * @property string $address
+ * @property int|null $delivery_type
+ * @property string|null $address_auto
+ * @property int|null $address_station_id
  *
+ * @property Station $addressStation
  * @property Order[] $orders
  * @property User $user
  */
@@ -36,10 +37,9 @@ class ShippingAddress extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'city', 'address'], 'required'],
-            [['user_id'], 'integer'],
-            [['city', 'address'], 'string', 'max' => 255],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['delivery_type', 'address_station_id'], 'integer'],
+            [['address_auto'], 'string', 'max' => 255],
+            [['address_station_id'], 'exist', 'skipOnError' => true, 'targetClass' => Station::className(), 'targetAttribute' => ['address_station_id' => 'id']],
         ];
     }
 
@@ -50,10 +50,20 @@ class ShippingAddress extends Bridgeable1CActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'city' => 'City',
-            'address' => 'Address',
+            'delivery_type' => 'Delivery Type',
+            'address_auto' => 'Address Auto',
+            'address_station_id' => 'Address Station ID',
         ];
+    }
+
+    /**
+     * Gets query for [[AddressStation]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAddressStation()
+    {
+        return $this->hasOne(Station::className(), ['id' => 'address_station_id']);
     }
 
     /**
@@ -63,16 +73,7 @@ class ShippingAddress extends Bridgeable1CActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::class, ['shipment_point_id' => 'id']);
+        return $this->hasMany(Order::className(), ['shipment_point_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
-    }
 }
