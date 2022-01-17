@@ -22,7 +22,7 @@ class m211209_045223_create_report_table extends Migration
             // ASK MARK!!!
             'status' => $this->tinyInteger()->defaultValue(0),
             'user_id' => $this->bigInteger()->notNull(),
-            'filepath' => $this->string()->notNull()
+            'filepath' => $this->string()
         ], $tableOptions); //
         $this->addForeignKey('report-user_id', 'report', 'user_id', 'user', 'id');
     }

@@ -22,10 +22,9 @@ class m211209_045306_create_invoice_table extends Migration
             // ASK MARK!!!
             'status' => $this->tinyInteger()->defaultValue(0),
             'user_id' => $this->bigInteger()->notNull(),
-            'number' => $this->integer()->notNull(),
-            // MARK!!!
+            'number' => $this->string(),
             'data' => $this->date()->notNull(),
-            'filepath' => $this->string()->notNull(),
+            'filepath' => $this->string(),
             // doesn't have a cement mark
         ], $tableOptions);
         $this->addForeignKey('invoice-user_id', 'invoice', 'user_id', 'user', 'id');

@@ -11,9 +11,9 @@ use Yii;
  * @property int $id
  * @property int|null $status
  * @property int $user_id
- * @property int $number
+ * @property string|null $number
  * @property string $data
- * @property string $filepath
+ * @property string|null $filepath
  *
  * @property User $user
  */
@@ -37,11 +37,11 @@ class Invoice extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['status', 'user_id', 'number'], 'integer'],
-            [['user_id', 'number', 'data', 'filepath'], 'required'],
+            [['status', 'user_id'], 'integer'],
+            [['user_id', 'data'], 'required'],
             [['data'], 'safe'],
-            [['filepath'], 'string', 'max' => 255],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['number', 'filepath'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -67,6 +67,6 @@ class Invoice extends Bridgeable1CActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

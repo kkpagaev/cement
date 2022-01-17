@@ -24,7 +24,7 @@ class m211209_045335_create_act_table extends Migration
             'number' => $this->integer()->notNull(),
             'data_from' => $this->date()->notNull(),
             'data_to' => $this->date()->notNull(),
-            'filepath' => $this->string()->notNull(),
+            'filepath' => $this->string(),
         ], $tableOptions);
         $this->addForeignKey('act-user_id', 'act', 'user_id', 'user', 'id');
     }

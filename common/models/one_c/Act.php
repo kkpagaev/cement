@@ -39,7 +39,7 @@ class Act extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'contract_id', 'number', 'data_from', 'data_to', 'filepath'], 'required'],
+            [['user_id', 'contract_id', 'number', 'data_from', 'data_to'], 'required'],
             [['user_id', 'contract_id', 'number'], 'integer'],
             [['data_from', 'data_to'], 'safe'],
             [['filepath'], 'string', 'max' => 255],

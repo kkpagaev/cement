@@ -36,7 +36,7 @@ class Report extends Bridgeable1CActiveRecord
     {
         return [
             [['status', 'user_id'], 'integer'],
-            [['user_id', 'filepath'], 'required'],
+            [['user_id'], 'required'],
             [['filepath'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
