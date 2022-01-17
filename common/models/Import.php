@@ -5,6 +5,7 @@ namespace common\models;
 use common\models\one_c\Product;
 use common\services\one_c\models\Export;
 use Yii;
+use yii\db\Exception;
 
 /**
  * This is the model class for table "import".
@@ -57,36 +58,47 @@ class Import extends \yii\db\ActiveRecord
     public function process()
     {
         if($this->action == Export::ACTION_CREATE) {
-            $this->processCreate();
+            return $this->processCreate();
         } else if($this->action == Export::ACTION_UPDATE) {
-            $this->processUpdate();
+            return $this->processUpdate();
         } else if($this->action == Export::ACTION_DELETE) {
-            $this->processDelete();
+            return $this->processDelete();
         }
+        return null;
     }
 
     private function processCreate()
     {
         $modelClass = Export::dataTypes[$this->model_type];
         $model = new $modelClass;
-        $model->attributes = $this->getData();
+        $model->attributes = ($this->getData());
+        $model->id = $this->model_id;
         $model->save();
+        if($model->hasErrors()) {
+            return $model->getErrors();
+        }
+        return null;
     }
 
     public function getData(): array
     {
-        return json_decode(($this->data), true);
+        $data = json_decode(($this->data), true);
+        return $data;
     }
 
     private function processUpdate()
     {
         $modelClass = Export::dataTypes[$this->model_type];
         $model = (new $modelClass)::find()->where(['id' => $this->model_id])->one();
-        if($model == null) return;
+        if($model == null) return null;
         foreach ($this->getData() as $key => $value) {
             $model->{$key} = $value;
         }
         $model->save();
+        if($model->hasErrors()) {
+            return $model->getErrors();
+        }
+        return null;
     }
 
     private function processDelete()
@@ -96,5 +108,9 @@ class Import extends \yii\db\ActiveRecord
         $model = (new $modelClass)::find()->where(['id' => $this->model_id])->one();
 
         $model->delete();
+        if($model->hasErrors()) {
+            return $model->getErrors();
+        }
+        return null;
     }
 }
