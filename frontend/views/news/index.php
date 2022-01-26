@@ -27,7 +27,7 @@
                             $post = $news[$index];
                         ?>
                             <div class="card">
-                                <img class="card-img-top" src="img/user1.png" alt="Card">
+                                <img class="card-img-top" src="<?= $post->image_filepath?>" alt="Card">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $post->title?></h5>
                                     <p class="card-text"><?= $post->description?></p>
