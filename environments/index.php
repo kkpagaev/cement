@@ -34,6 +34,7 @@ return [
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
+            'backend/web/uploads',
             'console/runtime',
             'frontend/runtime',
             'frontend/web/assets',
@@ -47,12 +48,16 @@ return [
             'common/config/codeception-local.php',
             'frontend/config/main-local.php',
         ],
+        'createSymlink' => [
+            'frontend/web/uploads'  => 'backend/web/uploads',
+        ]
     ],
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
+            'backend/web/uploads',
             'console/runtime',
             'frontend/runtime',
             'frontend/web/assets',
@@ -64,5 +69,8 @@ return [
             'backend/config/main-local.php',
             'frontend/config/main-local.php',
         ],
+        'createSymlink' => [
+            'frontend/web/uploads'  => 'backend/web/uploads',
+        ]
     ],
 ];
