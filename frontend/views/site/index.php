@@ -16,29 +16,16 @@ $this->title = 'My Yii Application';
 
 
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="/img/npr1.png" width="620" height="370" class="rounded d-block w-100" alt="Carousel">
-                        <div class="carousel-caption ">
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;Вітаємо у кабінеті клієнта "Кривий Ріг Цемент"</h5>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Перейти у профіль</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="/img/242142145.png" width="600" height="370" class="rounded d-block w-100"
+                    <?php foreach ($slider as $key => $slide): ?>
+                    <div class="carousel-item <?php if($key == 0) echo "active"; ?>">
+                        <img src="<?= $slide->image_filepath ?>" width="600" height="370" class="rounded d-block w-100"
                              alt="Carousel">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;Розділ мої заявки</h5>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Перейглянути</p>
+                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<?= $slide->title ?></h5>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $slide->subtitle ?></p>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="/img/412351325315.png" width="600" height="370" class="rounded d-block w-100"
-                             alt="Carousel">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;Статуси усіх замовлень</h5>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Переглянути</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -517,7 +504,7 @@ $this->title = 'My Yii Application';
         </div>
 
         <div class="col-xl-4 col-lg-3 col-md-3 col-sm-3 col-3">
-            <a href="cards.html" class="effects">
+            <a href="/news" class="effects">
                 <img src="/img/7522720.png" class="img-fluid" alt="Tycoon Admin">
                 <div class="overlay">
                     <span class="expand">Новини</span>

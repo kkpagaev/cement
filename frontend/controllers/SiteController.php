@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Slider;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -66,7 +67,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $slider = Slider::find()->all();
+        return $this->render('index', ['slider' => $slider]);
     }
 
     /**
