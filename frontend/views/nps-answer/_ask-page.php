@@ -11,8 +11,7 @@ use yii\widgets\ActiveForm;
 <section>
     <div class="row gutters">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="text-center"><h5><i>За шкалою від 0 до 10, оберіть рівень задоволення
-                        від співпраці з нашою компанією</i></h5>
+            <div class="text-center"><h5><i><?= $i18n['shkala']; ?></i></h5>
             </div>
             <div class="card">
                 <div class="card-body">
