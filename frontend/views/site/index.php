@@ -484,7 +484,7 @@ $this->title = 'My Yii Application';
 <div class="baguetteBoxThree gallery">
     <div class="row gutters">
         <div class="col-xl-4 col-lg-3 col-md-3 col-sm-3 col-3">
-            <a href="nps-pre.html" class="effects">
+            <a href="/nps-answer" class="effects">
                 <img src="/img/121421.png" class="img-fluid" alt="Tycoon Admin">
                 <div class="overlay">
                     <span class="expand"> NPS Рейтинг </span>
