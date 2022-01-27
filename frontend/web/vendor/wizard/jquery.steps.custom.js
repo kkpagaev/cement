@@ -4,6 +4,10 @@ $("#example-basic").steps({
 	bodyTag: "section",
 	transitionEffect: "slideLeft",
 	autoFocus: true,
+	onFinished: function (event, currentIndex) {
+		$("#nps-form").submit();
+	}
+
 });
 
 

@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
     <!-- Row start -->
     <div class="accordion-container">
         <div class="accordion-header" id="withIconOne">
-            <?php $form = ActiveForm::begin(); ?>
+            <?php $form = ActiveForm::begin(["id" => "nps-form"]); ?>
             <div class="text-left"><h3>Опитування клієнтів</h3></div>
 
             <br>
@@ -38,9 +38,7 @@ use yii\widgets\ActiveForm;
                                             <div class="accordion-header" id="withIconOne">
                                                 <div class="card-body">
 
-                                                    <div class="text-center"><h3>На скільки ймовірно, що Ви
-                                                            порекомендуєте нашу компанію, за шкалою від 0 до 10, де "0"
-                                                            означає "мало ймовірно", і "10" - "дуже ймовірно"?</h3>
+                                                    <div class="text-center"><h3><?= $i18n['question_1'] ?></h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,7 +110,7 @@ use yii\widgets\ActiveForm;
                                                                                         10 => 10,
                                                                                     ],
                                                                                     [
-                                                                                        'item' => function($index, $label, $name, $checked, $value) {
+                                                                                        'item' => function ($index, $label, $name, $checked, $value) {
                                                                                             $return = '<td><div class="form-check form-check-inline align-center">';
                                                                                             $return .= '<input type="radio" class="form-check-input" name="' . $name . '" value="' . $value . '" tabindex="3">';
                                                                                             $return .= '</div></td>';
@@ -150,9 +148,9 @@ use yii\widgets\ActiveForm;
 
                                         <div class="form-group">
                                             <?= $form->field($model, 'text_1')->textarea([
-                                                    'class' => 'form-control',
-                                                    'rows' => '3',
-                                            ])->label(false)?>
+                                                'class' => 'form-control',
+                                                'rows' => '3',
+                                            ])->label(false) ?>
 
                                         </div>
 
@@ -186,7 +184,7 @@ use yii\widgets\ActiveForm;
                                                         <?= $form->field($model, 'text_2')->textarea([
                                                             'class' => 'form-control',
                                                             'rows' => '3',
-                                                        ])->label(false)?>
+                                                        ])->label(false) ?>
                                                     </div>
 
 
@@ -200,25 +198,33 @@ use yii\widgets\ActiveForm;
                         <?= $this->render('_ask-page', [
                             'questions' => array_slice($i18n, 1, 7),
                             'form' => $form,
-                            'model' => $model
+                            'model' => $model,
+                            'i18n' => $i18n
+
                         ]); ?>
                         <h3>-------------------------</h3>
                         <?= $this->render('_ask-page', [
                             'questions' => array_slice($i18n, 8, 10),
                             'form' => $form,
-                            'model' => $model
+                            'model' => $model,
+                            'i18n' => $i18n
+
                         ]); ?>
                         <h3>-------------------------</h3>
                         <?= $this->render('_ask-page', [
                             'questions' => array_slice($i18n, 18, 7),
                             'form' => $form,
-                            'model' => $model
+                            'model' => $model,
+                            'i18n' => $i18n
+
                         ]); ?>
                         <h3>-------------------------</h3>
                         <?= $this->render('_ask-page', [
                             'questions' => array_slice($i18n, 25, 5),
                             'form' => $form,
-                            'model' => $model
+                            'model' => $model,
+                            'i18n' => $i18n
+
                         ]); ?>
                         <h3>&nbsp;</h3>
                         <section>    <!-- Row start -->
@@ -258,3 +264,15 @@ use yii\widgets\ActiveForm;
 <link rel="stylesheet" href="/vendor/wizard/jquery.steps.css"/>
 <script src="/vendor/wizard/jquery.steps.min.js" defer></script>
 <script src="/vendor/wizard/jquery.steps.custom.js" defer></script>
+<script defer>
+    var els = document.getElementsByTagName("a");
+    for (var i = 0, l = els.length; i < l; i++) {
+        var el = els[i];
+        console.log(el);
+        if (el.href === '#finish') {
+            el.innerHTML = "dead link";
+            el.href = "#";
+        }
+    }
+
+</script>
