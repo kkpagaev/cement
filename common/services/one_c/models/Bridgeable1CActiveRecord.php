@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
 abstract class Bridgeable1CActiveRecord extends ActiveRecord implements Bridgeable1C
 {
     // Exclude attributes in the get model date method
-    public array $excludeExportAttributes = [];
+    public $excludeExportAttributes = [];
 
     function getModelId()
     {

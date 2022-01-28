@@ -30,7 +30,7 @@ use yii\web\IdentityInterface;
  */
 class User extends Bridgeable1CActiveRecord implements IdentityInterface
 {
-    public array $excludeExportAttributes = ['auth_key'];
+    public $excludeExportAttributes = ['auth_key'];
 
     /**
      * Finds an identity by the given ID.
