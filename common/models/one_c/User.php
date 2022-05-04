@@ -101,6 +101,7 @@ class User extends Bridgeable1CActiveRecord implements IdentityInterface
             [['first_name', 'last_name', 'middle_name', 'email', 'password'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['email'], 'unique'],
+            [['c1_id'], 'string'],
             [['is_banned'], 'boolean'],
         ];
     }

@@ -19,12 +19,12 @@ class m211209_045223_create_report_table extends Migration
         }
         $this->createTable('{{%report}}', [
             'id' => $this->bigPrimaryKey(),
-            // ASK MARK!!!
+            'c1_id' => $this->string(),
             'status' => $this->tinyInteger()->defaultValue(0),
-            'user_id' => $this->bigInteger()->notNull(),
+            'user_id' => $this->string()->unsigned(),
             'filepath' => $this->string()
         ], $tableOptions); //
-        $this->addForeignKey('report-user_id', 'report', 'user_id', 'user', 'id');
+//        $this->addForeignKey('report-user_id', 'report', 'user_id', 'user', 'c1_id');
     }
 
     /**
@@ -32,7 +32,7 @@ class m211209_045223_create_report_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('report-user_id', 'report');
+//        $this->dropForeignKey('report-user_id', 'report');
         $this->dropTable('{{%report}}');
     }
 }

@@ -439,7 +439,7 @@ h3.styled {
 	}
 	&.primary {
 		background: $primary-color;
-		.header-actions {
+		header-actionss {
 			> li {
 				> a {
 					> i {
@@ -552,7 +552,7 @@ h3.styled {
 
 
 // Header Ations *************************
-.header-actions {
+header-actionss {
 	display: flex;
 	align-items: center;
 	> li {

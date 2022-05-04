@@ -12,7 +12,11 @@ abstract class Bridgeable1CActiveRecord extends ActiveRecord implements Bridgeab
 
     function getModelId()
     {
+        if($this->hasAttribute('c1_id')) {
+            return $this->getAttribute('c1_id');
+        }
         return $this->getAttribute('id');
+
     }
 
     function getModelData(): array
@@ -20,6 +24,9 @@ abstract class Bridgeable1CActiveRecord extends ActiveRecord implements Bridgeab
         $data = $this->attributes;
         if(key_exists('id', $data)) {
             unset($data['id']);
+        }
+        if(key_exists('c1_id', $data)) {
+            unset($data['c1_id']);
         }
         foreach ($this->excludeExportAttributes as $attribute) {
             unset($attribute);

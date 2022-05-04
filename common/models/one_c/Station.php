@@ -29,6 +29,8 @@ class Station extends \yii\db\ActiveRecord
     {
         return [
             [['fullname'], 'string', 'max' => 255],
+            [['c1_id'], 'string'],
+
         ];
     }
 

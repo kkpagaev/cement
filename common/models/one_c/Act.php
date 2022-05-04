@@ -12,7 +12,7 @@ use Yii;
  * @property int $user_id
  * @property int $contract_id
  * @property int $number
- * @property string $data_from
+ * @property string $date_from
  * @property string $data_to
  * @property string $filepath
  *
@@ -39,12 +39,12 @@ class Act extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'contract_id', 'number', 'data_from', 'data_to'], 'required'],
-            [['user_id', 'contract_id', 'number'], 'integer'],
-            [['data_from', 'data_to'], 'safe'],
-            [['filepath'], 'string', 'max' => 255],
-            [['contract_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contract::class, 'targetAttribute' => ['contract_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['user_id', 'contract_id', 'number', 'date_from', 'data_to'], 'required'],
+            [[ 'number'], 'integer'],
+            [['c1_id'], 'string'],
+
+            [['date_from', 'data_to'], 'safe'],
+            [['filepath', 'user_id', 'contract_id',], 'string', 'max' => 255],
         ];
     }
 
@@ -58,7 +58,7 @@ class Act extends Bridgeable1CActiveRecord
             'user_id' => 'User ID',
             'contract_id' => 'Contract ID',
             'number' => 'Number',
-            'data_from' => 'Data From',
+            'date_from' => 'Data From',
             'data_to' => 'Data To',
             'filepath' => 'Filepath',
         ];

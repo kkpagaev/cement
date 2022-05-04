@@ -19,6 +19,7 @@ class m220117_032954_create_station_table extends Migration
         }
         $this->createTable('{{%station}}', [
             'id' => $this->bigPrimaryKey(),
+            'c1_id' => $this->string(),
             'fullname' => $this->string(),
         ], $tableOptions);
     }

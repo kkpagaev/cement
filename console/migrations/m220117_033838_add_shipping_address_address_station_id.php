@@ -12,8 +12,8 @@ class m220117_033838_add_shipping_address_address_station_id extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('shipping_address', 'address_station_id', $this->bigInteger());
-        $this->addForeignKey('shipping_address-address_station_id', 'shipping_address', 'address_station_id', 'station', 'id');
+       $this->addColumn('shipping_address', 'address_station_id', $this->string());
+//        $this->addForeignKey('shipping_address-address_station_id', 'shipping_address', 'address_station_id', 'station', 'c1_id');
     }
 
     /**
@@ -21,8 +21,7 @@ class m220117_033838_add_shipping_address_address_station_id extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('shipping_address','shipping_address-address_station_id');
-        return false;
+//        $this->dropForeignKey('shipping_address','shipping_address-address_station_id');
     }
 
     /*

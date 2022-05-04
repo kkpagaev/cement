@@ -35,10 +35,12 @@ class Report extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['status', 'user_id'], 'integer'],
+            [['status'], 'integer'],
+            [['user_id'], 'string'],
+            [['c1_id'], 'string'],
+
             [['user_id'], 'required'],
             [['filepath'], 'string', 'max' => 255],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 

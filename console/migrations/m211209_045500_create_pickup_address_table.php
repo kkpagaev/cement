@@ -20,6 +20,7 @@ class m211209_045500_create_pickup_address_table extends Migration
         }
         $this->createTable('{{%pickup_address}}', [
             'id' => $this->bigPrimaryKey(),
+            'c1_id' => $this->string(),
             'address' => $this->string()->notNull(),
         ], $tableOptions);
     }

@@ -72,8 +72,11 @@ class Import extends \yii\db\ActiveRecord
         $modelClass = Export::dataTypes[$this->model_type];
         $model = new $modelClass;
         $model->attributes = ($this->getData());
-        $model->id = $this->model_id;
-        $model->save();
+        try {
+            $model->save();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
         if($model->hasErrors()) {
             return $model->getErrors();
         }
@@ -83,13 +86,14 @@ class Import extends \yii\db\ActiveRecord
     public function getData(): array
     {
         $data = json_decode(($this->data), true);
+        $data['c1_id'] = $this->model_id;
         return $data;
     }
 
     private function processUpdate()
     {
         $modelClass = Export::dataTypes[$this->model_type];
-        $model = (new $modelClass)::find()->where(['id' => $this->model_id])->one();
+        $model = (new $modelClass)::find()->where(['c1_id' => $this->model_id])->one();
         if($model == null) return null;
         foreach ($this->getData() as $key => $value) {
             $model->{$key} = $value;

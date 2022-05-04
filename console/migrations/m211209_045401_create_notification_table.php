@@ -19,13 +19,14 @@ class m211209_045401_create_notification_table extends Migration
         }
         $this->createTable('{{%notification}}', [
             'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger()->notNull(),
+            'c1_id' => $this->string(),
+            'user_id' => $this->string(),
             'is_read' => $this->boolean()->defaultValue(false),
             'title' => $this->string()->notNull(),
             'description' => $this->string()->notNull(),
             'timestamp' => $this->datetime()->notNull(),
         ], $tableOptions);
-        $this->addForeignKey('notification-user_id', 'notification', 'user_id', 'user', 'id');
+//        $this->addForeignKey('notification-user_id', 'notification', 'user_id', 'user', 'c1_id');
 
     }
 
@@ -34,7 +35,7 @@ class m211209_045401_create_notification_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('notification-user_id', 'notification');
+//        $this->dropForeignKey('notification-user_id', 'notification');
         $this->dropTable('{{%notification}}');
 
     }

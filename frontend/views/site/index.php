@@ -434,7 +434,7 @@ $this->title = 'My Yii Application';
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <div class="social-tile">
                     <div class="social-icon bg-info">
-                        <a href="zayavka-avto.html"><i class="icon-truck"></i></a href>
+                        <a href="/place-order/auto"><i class="icon-truck"></i></a href>
                     </div>
                     <div>Розмістити заявку</div>
                     <h5></h5>
@@ -452,7 +452,7 @@ $this->title = 'My Yii Application';
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <div class="social-tile">
                     <div class="social-icon bg-info">
-                        <a href="rahunok-na-predoplatu.html"><i class="icon-shopping-bag1"></i></a>
+                        <a href="/invoice"><i class="icon-shopping-bag1"></i></a>
                     </div>
                     <div>Отримати рахунок</div>
                     <h5></h5>
@@ -461,7 +461,7 @@ $this->title = 'My Yii Application';
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <div class="social-tile">
                     <div class="social-icon bg-info">
-                        <a href="akt-zvirky.html"><i class="icon-shopping-bag1"></i></a>
+                        <a href="/act"><i class="icon-shopping-bag1"></i></a>
                     </div>
                     <div>Отримати акт звірки</div>
                     <h5></h5>

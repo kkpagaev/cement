@@ -20,6 +20,7 @@ class m211209_045531_create_wagon_type_table extends Migration
         }
         $this->createTable('{{%wagon_type}}', [
             'id' => $this->bigPrimaryKey(),
+            'c1_id' => $this->string(),
             'title' => $this->string()->notNull(),
         ], $tableOptions);
     }

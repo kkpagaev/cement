@@ -34,6 +34,7 @@ class Consignee extends Bridgeable1CActiveRecord
     {
         return [
             [['fullname'], 'required'],
+            [['c1_id'], 'string'],
             [['fullname'], 'string', 'max' => 255],
         ];
     }

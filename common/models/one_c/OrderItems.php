@@ -22,6 +22,32 @@ use Yii;
  */
 class OrderItems extends Bridgeable1CActiveRecord
 {
+    const SCENARIO_AUTO = 0;
+    const SCENARIO_SELF_PICKUP = 1;
+    const SCENARIO_RAILWAY = 2;
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_SELF_PICKUP => [
+                'product_id',
+                'weight',
+                'order_date',
+            ],
+            self::SCENARIO_AUTO => [
+                'product_id',
+                'weight',
+                'order_date',
+                'order_time',
+            ],
+            self::SCENARIO_RAILWAY => [
+                'product_id',
+                'weight',
+                'wagon_type_id',
+            ],
+        ];
+    }
+
     function getModelType(): int
     {
         return 11;
@@ -40,12 +66,25 @@ class OrderItems extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'product_id', 'weight'], 'required'],
-            [['order_id', 'product_id', 'weight', 'wagon_type_id'], 'integer'],
+            [['product_id', 'weight'], 'required'],
+            [['order_id', 'product_id', 'wagon_type_id'], 'string'],
+            [['weight'], 'integer'],
             [['order_date', 'order_time'], 'safe'],
-            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::class, 'targetAttribute' => ['order_id' => 'id']],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::class, 'targetAttribute' => ['product_id' => 'id']],
-            [['wagon_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => WagonType::class, 'targetAttribute' => ['wagon_type_id' => 'id']],
+            [[
+                'product_id',
+                'weight',
+                'wagon_type_id',], 'required', 'on' => self::SCENARIO_RAILWAY],
+            [[
+                'product_id',
+                'weight',
+                'order_date',
+            ], 'required', 'on' => self::SCENARIO_SELF_PICKUP],
+            [[
+                'product_id',
+                'weight',
+                'order_date',
+                'order_time',
+            ], 'required', 'on' => self::SCENARIO_AUTO],
         ];
     }
 

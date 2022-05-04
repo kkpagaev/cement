@@ -10,6 +10,8 @@ use Yii;
  *
  * @property int $id
  * @property string $fullname
+ * @property string $c1_id
+ * @property string $user_id
  *
  * @property Order[] $orders
  */
@@ -35,6 +37,8 @@ class FinalRecipient extends Bridgeable1CActiveRecord
         return [
             [['fullname'], 'required'],
             [['fullname'], 'string', 'max' => 255],
+            [['c1_id'], 'string'],
+            [['user_id'], 'string'],
         ];
     }
 

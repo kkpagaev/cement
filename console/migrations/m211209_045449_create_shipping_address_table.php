@@ -19,6 +19,7 @@ class m211209_045449_create_shipping_address_table extends Migration
         }
         $this->createTable('{{%shipping_address}}', [
             'id' => $this->bigPrimaryKey(),
+            'c1_id' => $this->string(),
             //'user_id' => $this->bigInteger()->notNull(),
             'delivery_type' => $this->tinyInteger(),
             'address_auto' => $this->string(),

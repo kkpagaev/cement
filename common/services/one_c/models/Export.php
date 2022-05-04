@@ -60,8 +60,9 @@ class Export extends \yii\db\ActiveRecord
         13 => Consignee::class
     ];
 
-    public static function export(Bridgeable1C $resource, string $user_id, int $action)
+    public static function export(Bridgeable1C $resource, string $user_id, int $action, bool $preSave = false)
     {
+
         $export = new Export();
         $export->user_id = $user_id;
         $export->model_type = $resource->getModelType();

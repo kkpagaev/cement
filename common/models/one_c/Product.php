@@ -34,6 +34,7 @@ class Product extends Bridgeable1CActiveRecord
     {
         return [
             [['title'], 'required'],
+            [['c1_id'], 'string'],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -46,6 +47,7 @@ class Product extends Bridgeable1CActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'c1_id' => '1c id',
         ];
     }
 

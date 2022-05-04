@@ -34,6 +34,7 @@ class WagonType extends Bridgeable1CActiveRecord
     {
         return [
             [['title'], 'required'],
+            [['c1_id'], 'string'],
             [['title'], 'string', 'max' => 255],
         ];
     }

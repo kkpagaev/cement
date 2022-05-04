@@ -12,7 +12,7 @@ class m211213_055439_add_act_contract_id_foreign_key extends Migration
      */
     public function safeUp()
     {
-        $this->addForeignKey('act-contract_id', 'act', 'contract_id', 'contract', 'id');
+        //$this->addForeignKey('act-contract_id', 'act', 'contract_id', 'contract', 'c1_id');
     }
 
     /**
@@ -20,7 +20,7 @@ class m211213_055439_add_act_contract_id_foreign_key extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('act-contract_id', 'act');
+        //$this->dropForeignKey('act-contract_id', 'act');
     }
 
     /*

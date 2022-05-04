@@ -12,7 +12,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Suez+One&display=swap");
 /************************************************
 	************************************************
-											Body Css							
+											Body Css
 	************************************************
 ************************************************/
 html {
@@ -62,7 +62,7 @@ body {
 
 /************************************************
 	************************************************
-										Re Usable Css							
+										Re Usable Css
 	************************************************
 ************************************************/
 a {
@@ -257,7 +257,7 @@ h3.styled {
   background-color: #616265 !important; }
   .bg-grey:hover, .bg-grey:focus, a.bg-grey:hover, a.bg-grey:focus {
     background-color: #555558 !important; }
-    
+
     .bg-ara, a.ara {
   background-color: #ededed !important; }
    .bg-ara:hover, .bg-ara:focus, a.bg-ara:hover, a.bg-ara:focus {
@@ -301,7 +301,7 @@ h3.styled {
 
 /************************************************
 	************************************************
-									Animations Css							
+									Animations Css
 	************************************************
 ************************************************/
 @-webkit-keyframes slideInUp {
@@ -326,7 +326,7 @@ h3.styled {
     opacity: 1; } }
 /************************************************
 	************************************************
-										Layout Css							
+										Layout Css
 	************************************************
 ************************************************/
 .header {
@@ -559,8 +559,6 @@ h3.styled {
         margin-top: 0;
         display: block; }
       .header-actions > li:hover:after, .header-actions > li:focus:after {
-        content: '';
-        background: url(../img/lines.svg) no-repeat;
         position: absolute;
         top: 0;
         left: 0;
@@ -742,7 +740,7 @@ ul.header-notifications {
 
 /************************************************
 	************************************************
-									Layout CSS							
+									Layout CSS
 	************************************************
 ************************************************/
 @-webkit-keyframes swing {
@@ -1333,7 +1331,7 @@ ul.header-notifications {
     display: none; } }
 /************************************************
 	************************************************
-									Re Usable Classes							
+									Re Usable Classes
 	************************************************
 ************************************************/
 .chart-height-xl {
@@ -1372,25 +1370,25 @@ ul.header-notifications {
 .h-165 {
   min-height: 165px; }
 
-.footer {   
+.footer {
   font-size: .65rem;
   text-align: 5px;
- 
+
   background: #208450;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 5px; 
+  border-radius: 5px;
     height: 65px;
     color: #fff;
 }
-.footer-text {   
+.footer-text {
   font-size: .65rem;
 padding-left: 900px;
 
 
- 
 
-    
+
+
 }
 /************************************************
 	************************************************
@@ -2146,7 +2144,7 @@ padding-left: 900px;
     position: fixed;
     bottom: 7px;
     left:360px;
-    
+
     z-index: 1;
     color: #ffffff;
     background: rgba(255, 255, 255, 0.1);
@@ -2196,9 +2194,9 @@ padding-left: 900px;
         -ms-transform: scale(1);
         transform: scale(1);
         opacity: 1; }
-        
-        
-        
+
+
+
 .social-btns1 {
   display: flex;
   align-items: center;
@@ -2219,7 +2217,7 @@ padding-left: 900px;
     position: fixed;
     bottom: 7px;
     left:1160px;
-    
+
     z-index: 1;
     color: #ffffff;
     background: rgba(255, 255, 255, 0.1);
@@ -2271,7 +2269,7 @@ padding-left: 900px;
         opacity: 1; }
 /************************************************
 	************************************************
-										Widgets CSS							
+										Widgets CSS
 	************************************************
 ************************************************/
 .graph-status-right {
@@ -2686,7 +2684,7 @@ table.projects-table {
     padding: .8rem 1.25rem;
     border: 0;
     color: #ffffff; }
-    table.hover { 
+    table.hover {
     background: #d5e6a2; /* Цвет фона */
    }
   table.projects-table td {
@@ -3586,7 +3584,7 @@ ul.customer-rating li {
 
 /************************************************
 	************************************************
-										Vendor Css							
+										Vendor Css
 	************************************************
 ************************************************/
 .slimScrollDiv:hover .slimScrollBar {
@@ -3743,7 +3741,7 @@ button.dt-button, div.dt-button, a.dt-button {
 
 /************************************************
 	************************************************
-							Bootstrap Overwrite Css							
+							Bootstrap Overwrite Css
 	************************************************
 ************************************************/
 .accordion .accordion-container {
@@ -4143,10 +4141,10 @@ button:focus {
 .carousel-caption {
   background-color: #009d4d;
   opacity: 0.7;
-  
+
 }
 
-    
+
 .card {
   background: #ffffff;
   -webkit-border-radius: 5px;
@@ -5307,13 +5305,13 @@ code {
   transition: .8s;
 }
 .menu-main a:hover:before, .menu-main .current:before {left: 0;}
-.menu-main a:hover:after, .menu-main .current:after {right: 0;}   
+.menu-main a:hover:after, .menu-main .current:after {right: 0;}
 @media (max-width: 550px) {
 .menu-main {padding-top: 0;}
 .menu-main li {display: block;}
 .menu-main li:after {content: none;}
 .menu-main a {
-  padding: 25px 0 20px; 
+  padding: 25px 0 20px;
   margin: 0 30px;
 }
 .buttons-align{

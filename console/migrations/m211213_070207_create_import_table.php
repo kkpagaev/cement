@@ -22,7 +22,7 @@ class m211213_070207_create_import_table extends Migration
             'id' => $this->primaryKey(),
             'user_id' => $this->string()->notNull(),
             'model_type' => $this->tinyInteger()->notNull(),
-            'model_id' => $this->bigInteger(),
+            'model_id' => $this->string(),
             'action' => $this->tinyInteger()->notNull(),
             'data' => $this->text(),
         ], $tableOptions);

@@ -37,11 +37,13 @@ class Notification extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'title', 'description', 'timestamp'], 'required'],
-            [['user_id', 'is_read'], 'integer'],
+            [['title', 'description', 'timestamp'], 'required'],
+            [['is_read'], 'integer'],
             [['timestamp'], 'safe'],
-            [['title', 'description'], 'string', 'max' => 255],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['c1_id'], 'string'],
+            [['user_id'], 'string'],
+
+            [['title', 'description', 'user_id'], 'string', 'max' => 255],
         ];
     }
 

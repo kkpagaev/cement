@@ -11,6 +11,7 @@ use Yii;
  * @property int $id
  * @property int|null $delivery_type
  * @property string|null $address_auto
+ * @property string $contract_id
  * @property int|null $address_station_id
  *
  * @property Station $addressStation
@@ -19,6 +20,8 @@ use Yii;
  */
 class ShippingAddress extends Bridgeable1CActiveRecord
 {
+    const DELIVERY_TYPE_AUTO = 0;
+    const DELIVERY_TYPE_RAILWAY = 1;
     function getModelType(): int
     {
         return 6;
@@ -39,7 +42,10 @@ class ShippingAddress extends Bridgeable1CActiveRecord
         return [
             [['delivery_type', 'address_station_id'], 'integer'],
             [['address_auto'], 'string', 'max' => 255],
-            [['address_station_id'], 'exist', 'skipOnError' => true, 'targetClass' => Station::className(), 'targetAttribute' => ['address_station_id' => 'id']],
+            [['address_station_id'], 'string'],
+            [['c1_id'], 'string'],
+            [['contract_id'], 'string'],
+
         ];
     }
 
@@ -53,6 +59,7 @@ class ShippingAddress extends Bridgeable1CActiveRecord
             'delivery_type' => 'Delivery Type',
             'address_auto' => 'Address Auto',
             'address_station_id' => 'Address Station ID',
+            'contract_id' => 'Contract ID',
         ];
     }
 

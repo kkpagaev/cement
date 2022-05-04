@@ -3,7 +3,7 @@ namespace frontend\controllers;
 
 use yii\web\Controller;
 
-class TestController extends Controller
+class aTestController extends Controller
 {
     public function actionTest(){
 

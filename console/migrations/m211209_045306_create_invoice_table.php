@@ -19,15 +19,16 @@ class m211209_045306_create_invoice_table extends Migration
         }
         $this->createTable('{{%invoice}}', [
             'id' => $this->bigPrimaryKey(),
+            'c1_id' => $this->string(),
             // ASK MARK!!!
             'status' => $this->tinyInteger()->defaultValue(0),
-            'user_id' => $this->bigInteger()->notNull(),
+            'user_id' => $this->string(),
             'number' => $this->string(),
             'data' => $this->date()->notNull(),
             'filepath' => $this->string(),
             // doesn't have a cement mark
         ], $tableOptions);
-        $this->addForeignKey('invoice-user_id', 'invoice', 'user_id', 'user', 'id');
+//        $this->addForeignKey('invoice-user_id', 'invoice', 'user_id', 'user', 'c1_id');
     }
 
     /**
@@ -35,7 +36,7 @@ class m211209_045306_create_invoice_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('invoice-user_id', 'invoice');
+//        $this->dropForeignKey('invoice-user_id', 'invoice');
         $this->dropTable('{{%invoice}}');
     }
 }

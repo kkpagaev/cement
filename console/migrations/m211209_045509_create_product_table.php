@@ -20,6 +20,7 @@ class m211209_045509_create_product_table extends Migration
         }
         $this->createTable('{{%product}}', [
             'id' => $this->bigPrimaryKey(),
+            'c1_id' => $this->string(),
             'title' => $this->string()->notNull(),
         ], $tableOptions);
     }

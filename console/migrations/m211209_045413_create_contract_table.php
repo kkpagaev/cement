@@ -19,10 +19,11 @@ class m211209_045413_create_contract_table extends Migration
         }
         $this->createTable('{{%contract}}', [
             'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger()->notNull(),
-            'data_from' => $this->date()->notNull(),
+            'c1_id' => $this->string(),
+            'user_id' => $this->string(),
+            'date_from' => $this->date(),
         ], $tableOptions);
-        $this->addForeignKey('contract-user_id', 'contract', 'user_id', 'user', 'id');
+//        $this->addForeignKey('contract-user_id', 'contract', 'user_id', 'user', 'c1_id');
 
     }
 
@@ -31,7 +32,7 @@ class m211209_045413_create_contract_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('contract-user_id', 'contract');
+//        $this->dropForeignKey('contract-user_id', 'contract');
         $this->dropTable('{{%contract}}');
 
     }

@@ -19,9 +19,9 @@ class m211214_002455_create_export_table extends Migration
         }
         $this->createTable('{{%export}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->bigInteger()->notNull(),
+            'user_id' => $this->string(),
             'model_type' => $this->tinyInteger()->notNull(),
-            'model_id' => $this->bigInteger(),
+            'model_id' => $this->string(),
             'action' => $this->tinyInteger()->notNull(),
             'data' => $this->text(),
         ], $tableOptions);

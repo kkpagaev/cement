@@ -13,6 +13,7 @@ class m130524_201442_init extends Migration
         }
         $this->createTable('{{%user}}', [
             'id' => $this->bigPrimaryKey(),
+            'c1_id' => $this->string(),
             'edrpou' => $this->string(),
             'first_name' => $this->string()->notNull(),
             'last_name' => $this->string()->notNull(),

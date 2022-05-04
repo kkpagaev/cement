@@ -35,6 +35,8 @@ class PickupAddress extends Bridgeable1CActiveRecord
         return [
             [['address'], 'required'],
             [['address'], 'string', 'max' => 255],
+            [['c1_id'], 'string'],
+
         ];
     }
 

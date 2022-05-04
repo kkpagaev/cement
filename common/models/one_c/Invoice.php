@@ -37,11 +37,12 @@ class Invoice extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['status', 'user_id'], 'integer'],
+            [['status'], 'integer'],
             [['user_id', 'data'], 'required'],
             [['data'], 'safe'],
-            [['number', 'filepath'], 'string', 'max' => 255],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['c1_id'], 'string'],
+
+            [['number', 'user_id', 'filepath'], 'string', 'max' => 255],
         ];
     }
 
