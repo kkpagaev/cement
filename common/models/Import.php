@@ -57,11 +57,11 @@ class Import extends \yii\db\ActiveRecord
 
     public function process()
     {
-        if($this->action == Export::ACTION_CREATE) {
+        if ($this->action == Export::ACTION_CREATE) {
             return $this->processCreate();
-        } else if($this->action == Export::ACTION_UPDATE) {
+        } else if ($this->action == Export::ACTION_UPDATE) {
             return $this->processUpdate();
-        } else if($this->action == Export::ACTION_DELETE) {
+        } else if ($this->action == Export::ACTION_DELETE) {
             return $this->processDelete();
         }
         return null;
@@ -69,37 +69,107 @@ class Import extends \yii\db\ActiveRecord
 
     private function processCreate()
     {
-        $modelClass = Export::dataTypes[$this->model_type];
-        $model = new $modelClass;
-        $model->attributes = ($this->getData());
+        $model = $this->getModel();
+        $data = $this->getData();
+        if(isset($data['data_file'])) {
+            $file = base64_decode( $data['data_file']);
+
+            //the used alias in path is only example.
+            //The datetime and random string are used to avoid conflicts
+            $filename =  date('Y-m-d-H-i-s') .
+            Yii::$app->security->generateRandomString(64) . '.pdf';
+            $filenamePath = Yii::getAlias(
+                '@frontend/web/uploads/' . $filename
+            );
+
+            if (!file_put_contents($filenamePath, $file)) {
+                throw new \yii\base\Exception("Couldn't save file to $filenamePath");
+            }
+            $data['filepath'] = $filename;
+            unset($file);
+            unset($data['data_file']);
+        }
+
+
+        $model->attributes = ($data);
         try {
             $model->save();
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-        if($model->hasErrors()) {
+        if ($model->hasErrors()) {
             return $model->getErrors();
         }
+
         return null;
     }
 
     public function getData(): array
     {
         $data = json_decode(($this->data), true);
-        $data['c1_id'] = $this->model_id;
+        if ($this->has1cId()) {
+            $data['c1_id'] = $this->model_id;
+        } else {
+            $data['id'] = $this->model_id;
+        }
         return $data;
+    }
+
+    private function getModelClass()
+    {
+        return Export::dataTypes[$this->model_type];
+    }
+    private function getModel() {
+        $class = ($this->getModelClass());
+        return new $class;
+    }
+
+    private function findModel() {
+        $modelClass = $this->getModelClass();
+        if ($this->has1cId()) {
+            $model = (new $modelClass)::find()->where(['c1_id' => $this->model_id])->one();
+        } else {
+            $model = (new $modelClass)::find()->where(['id' => $this->model_id])->one();
+        }
+        return $model;
+    }
+
+    private function has1cId()
+    {
+        return ($this->getModel())
+            ->hasAttribute('c1_id');
     }
 
     private function processUpdate()
     {
-        $modelClass = Export::dataTypes[$this->model_type];
-        $model = (new $modelClass)::find()->where(['c1_id' => $this->model_id])->one();
-        if($model == null) return null;
-        foreach ($this->getData() as $key => $value) {
+        $model = $this->findModel();
+        if ($model == null) return null;
+        $data = $this->getData();
+        if(isset($data['data_file'])) {
+            $file = base64_decode( $data['data_file']);
+
+            //the used alias in path is only example.
+            //The datetime and random string are used to avoid conflicts
+            $filename =  date('Y-m-d-H-i-s') .
+                Yii::$app->security->generateRandomString(64) . '.pdf';
+            $filenamePath = Yii::getAlias(
+                '@frontend/web/uploads/' . $filename
+            );
+
+            if (!file_put_contents($filenamePath, $file)) {
+                throw new \yii\base\Exception("Couldn't save file to $filenamePath");
+            }
+            $data['filepath'] = $filename;
+            unset($file);
+            unset($data['data_file']);
+        }
+
+
+        foreach ($data as $key => $value) {
             $model->{$key} = $value;
         }
         $model->save();
-        if($model->hasErrors()) {
+        if ($model->hasErrors()) {
             return $model->getErrors();
         }
         return null;
@@ -107,12 +177,9 @@ class Import extends \yii\db\ActiveRecord
 
     private function processDelete()
     {
-        $modelClass = Export::dataTypes[$this->model_type];
-        // retrieves model
-        $model = (new $modelClass)::find()->where(['id' => $this->model_id])->one();
-
+        $model = $this->findModel();
         $model->delete();
-        if($model->hasErrors()) {
+        if ($model->hasErrors()) {
             return $model->getErrors();
         }
         return null;

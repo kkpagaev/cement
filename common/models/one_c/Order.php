@@ -91,6 +91,8 @@ class Order extends Bridgeable1CActiveRecord
                 'driver_car_trailer_number',
                 'unload_address',
             ], 'required', 'on' => self::SCENARIO_SELF_PICKUP],
+            [['consignee_phone'], 'k-phone', 'countryValue' => 'UA'],//
+
 
         ];
     }
@@ -101,8 +103,9 @@ class Order extends Bridgeable1CActiveRecord
 
     public function scenarios()
     {
-        return [
-            self::SCENARIO_DEFAULT => [],
+
+        return array_merge(parent::scenarios(), [
+
             self::SCENARIO_SELF_PICKUP => [
                 'contract_id',
                 'pickup_address_id',
@@ -127,7 +130,7 @@ class Order extends Bridgeable1CActiveRecord
                 'consignee_code',
                 'consignee_branch',
                 'column_7',]
-        ];
+        ]);
     }
 
     /**
@@ -188,15 +191,15 @@ class Order extends Bridgeable1CActiveRecord
         return $this->hasOne(FinalRecipient::class, ['id' => 'final_recipient_id']);
     }
 
-//    /**
-//     * Gets query for [[OrderItems]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getOrderItems()
-//    {
-//        return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
-//    }
+    /**
+     * Gets query for [[OrderItems]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderItems()
+    {
+        return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
+    }
     public function getModelData(): array
     {
         $data = parent::getModelData();
@@ -211,7 +214,7 @@ class Order extends Bridgeable1CActiveRecord
      */
     public function getPickupAddress()
     {
-        return $this->hasOne(PickupAddress::class, ['id' => 'pickup_address_id']);
+        return $this->hasOne(PickupAddress::class, ['c1_id' => 'pickup_address_id']);
     }
 
     /**
@@ -219,9 +222,9 @@ class Order extends Bridgeable1CActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getShipmentPoint()
+    public function getShippingAdress()
     {
-        return $this->hasOne(ShippingAddress::class, ['id' => 'shipping_address_id']);
+        return $this->hasOne(ShippingAddress::class, ['c1_id' => 'shipping_address_id']);
     }
 
     /**

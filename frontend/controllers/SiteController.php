@@ -2,7 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\one_c\Order;
+use common\models\one_c\Product;
+use common\models\one_c\User;
 use common\models\Slider;
+use frontend\models\PasswordForm;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -67,8 +71,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $user_id = \Yii::$app->user->getIdentity()->c1_id;
+
         $slider = Slider::find()->all();
-        return $this->render('index', ['slider' => $slider]);
+        return $this->render('index', [
+            'slider' => $slider,
+            'orders' => Order::find()->where(['user_id' => $user_id])->all()
+        ]);
     }
 
     /**
@@ -88,12 +97,31 @@ class SiteController extends Controller
         }
 
         $model->password = '';
-
+        $this->layout = 'login';
         return $this->render('login', [
             'model' => $model,
         ]);
     }
 
+
+    public function actionPassword()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $this->layout = 'login';
+
+
+        $model = new PasswordForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            var_dump($model->post());
+            return $this->goBack();
+        }
+
+        return $this->render('password', [
+            'model' => $model,
+        ]);
+    }
     /**
      * Logs out the current user.
      *
@@ -103,6 +131,6 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect('/site/login');
     }
 }

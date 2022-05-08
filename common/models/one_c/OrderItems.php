@@ -28,7 +28,8 @@ class OrderItems extends Bridgeable1CActiveRecord
 
     public function scenarios()
     {
-        return [
+        return array_merge(parent::scenarios(), [
+
             self::SCENARIO_SELF_PICKUP => [
                 'product_id',
                 'weight',
@@ -45,7 +46,7 @@ class OrderItems extends Bridgeable1CActiveRecord
                 'weight',
                 'wagon_type_id',
             ],
-        ];
+        ]) ;
     }
 
     function getModelType(): int
@@ -67,8 +68,8 @@ class OrderItems extends Bridgeable1CActiveRecord
     {
         return [
             [['product_id', 'weight'], 'required'],
-            [['order_id', 'product_id', 'wagon_type_id'], 'string'],
-            [['weight'], 'integer'],
+            [['product_id', 'wagon_type_id'], 'string'],
+            [['weight', 'order_id'], 'integer'],
             [['order_date', 'order_time'], 'safe'],
             [[
                 'product_id',
@@ -85,6 +86,8 @@ class OrderItems extends Bridgeable1CActiveRecord
                 'order_date',
                 'order_time',
             ], 'required', 'on' => self::SCENARIO_AUTO],
+            [['order_date'], 'date', 'format' => 'php:Y-m-d'],
+            ['order_time', 'date', 'format'=>'php:H:i']
         ];
     }
 

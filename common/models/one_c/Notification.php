@@ -3,6 +3,7 @@
 namespace common\models\one_c;
 
 use common\services\one_c\models\Bridgeable1CActiveRecord;
+use common\services\one_c\models\Export;
 use Yii;
 
 /**
@@ -10,7 +11,7 @@ use Yii;
  *
  * @property int $id
  * @property int $user_id
- * @property int|null $is_read
+ * @property int $is_read
  * @property string $title
  * @property string $description
  * @property string $timestamp
@@ -31,6 +32,9 @@ class Notification extends Bridgeable1CActiveRecord
         return 'notification';
     }
 
+    public static function exportIsRead() {
+
+    }
     /**
      * {@inheritdoc}
      */

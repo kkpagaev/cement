@@ -1,5 +1,10 @@
 <?php
 /* @var $this yii\web\View */
+
+use kartik\date\DatePicker;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 ?>
 <div class="main-container-1">
 
@@ -54,34 +59,47 @@
 
                         </a>
                     </div>
-
+                    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
                     <div class="accordion-container">
                         <div class="accordion-header" id="withIconOne">
 
-                            <i class="icon icon-info2"></i> &nbsp;&nbsp;Оберіть номер договору, та період за який необхідно створити акт
+                            <i class="icon icon-info2"></i> &nbsp;&nbsp;Оберіть номер договору, та період за який необхідно створити акт (Формат дати 2022-09-25)
                             </a>
                         </div>
                         <div id="collapseWithIconOne" class="collapse show" aria-labelledby="withIconOne" data-parent="#withIconsAccordion">
                             <div class="accordion-body">
                                 <div class="row gutters">
                                     <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 col-3">
-                                        <select class="form-control">
-                                            <option>Договір № 2334535, від 23.02.20</option>
-                                        </select>
+                                        <?php echo $form->field($model, 'contract_id')
+                                            ->dropDownList(
+                                                $contracts,
+                                                array('prompt' => 'Оберіть договір')  // options
+                                            )->label(false);
+                                        ?>
                                     </div>
                                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
 
                                         <div class="form-group">
-
-                                            <input type="text" class="form-control" id="inputName" placeholder="Дата від">
+                                            <?= $form->field($model, 'date_from', [
+                                                'inputOptions' => [
+                                                    'placeholder' => 'Дата від',
+                                                    'class' => 'form-control',
+                                                    'id' => 'date_to'
+                                                ]
+                                            ])->label(false) ?>
                                         </div>
                                     </div>
                                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
 
 
                                         <div class="form-group">
-
-                                            <input type="text" class="form-control" id="inputName" placeholder="Дата по">
+                                            <?= $form->field($model, 'date_to', [
+                                                'inputOptions' => [
+                                                    'placeholder' => 'Дата до',
+                                                    'class' => 'form-control',
+                                                    'id' => 'date_from'
+                                                ]
+                                            ])->label(false) ?>
                                         </div>
                                     </div>
 
@@ -93,10 +111,11 @@
                             </div>
                         </div></div>
 
+                    <?php ActiveForm::end(); ?>
+                    <script href="/js/act.js" defer></script>
 
 
-
-
+                    <?php foreach($acts as $act): ?>
                     <div class="accordion-container">
 
                         <div id="collapseWithIconTwo" class="collapse show" aria-labelledby="withIconTwo" data-parent="#withIconsAccordion">
@@ -106,80 +125,43 @@
                                         <div class="form-group">
                                             <br> <br>
 
-                                            <h7>1.</h7>
+                                            <h7><?= $act->id ?>.</h7>
 
                                         </div>
                                     </div>
 
                                     <div class="col-xl-2 col-lglg-4 col-md-4 col-sm-4 col-12">
                                         <div class="form-group"><br><br>
-                                            <h7>Документ № 2123</h7>
+                                            <h7>Документ № <?= $act->number ?></h7>
 
                                         </div>
                                     </div>
 
                                     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12">
                                         <div class="form-group"><br><br>
-                                            <h7>Період звірки 10.02.21 -10.07.21</lh7>
+                                            <h7>Період звірки <?= $act->date_to ?> - <?= $act->date_from ?></h7>
 
                                         </div>
                                     </div>
 
                                     <div class="col-xl-3 col-lglg-4 col-md-4 col-sm-4 col-12">
                                         <div class="form-group"><br><br>
-                                            <h7>Договір № 2334535</h7>
+                                            <h7>Договір № <?= $act->contract_id ?></h7>
 
                                         </div>
                                     </div>
 
                                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
-                                        <br><br>
-                                        <button class="btn btn-primary btn-sm" type="submit">Завантажити</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 
-
-                    <div class="accordion-container">
-
-                        <div id="collapseWithIconTwo" class="collapse show" aria-labelledby="withIconTwo" data-parent="#withIconsAccordion">
-                            <div class="accordion-body">
-                                <div class="row gutters">
-                                    <div class="col-xl-1 col-lglg-4 col-md-4 col-sm-4 col-12">
-                                        <div class="form-group">
-                                            <br> <br>
-
-                                            <h7>2.</h7>
-
+                                            <?php if($act->filepath != null): ?>
+                                                <br><br>
+                                                <a class="btn btn-primary btn-sm" href="/uploads" download="<?php echo $act->filepath ?>">Завантажити</a>
+                                            <?php else: ?>
+                                                <br>
+                                                <span class="btn">Акт в обробці</span>
+                                            <?php endif;?>
                                         </div>
-                                    </div>
-
-                                    <div class="col-xl-2 col-lglg-4 col-md-4 col-sm-4 col-12">
-                                        <div class="form-group"><br><br>
-                                            <h7>Документ № 2123</h7>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12">
-                                        <div class="form-group"><br><br>
-                                            <h7>Період звірки 10.02.21 -10.07.21</lh7>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-3 col-lglg-4 col-md-4 col-sm-4 col-12">
-                                        <div class="form-group"><br><br>
-                                            <h7>Договір № 2334535</h7>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
-                                        <br><br>
-                                        <button class="btn btn-primary btn-sm" type="submit">Завантажити</button>
                                     </div>
                                 </div>
                             </div>
@@ -188,6 +170,8 @@
 
 
                     </div>
+                    <?php endforeach; ?>
+
                 </div>
             </div>
         </div>

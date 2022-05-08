@@ -40,9 +40,8 @@ class Invoice extends Bridgeable1CActiveRecord
             [['status'], 'integer'],
             [['user_id', 'data'], 'required'],
             [['data'], 'safe'],
-            [['c1_id'], 'string'],
 
-            [['number', 'user_id', 'filepath'], 'string', 'max' => 255],
+            [['number', 'user_id', 'filepath', 'product_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -69,5 +68,14 @@ class Invoice extends Bridgeable1CActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+    /**
+     * Gets query for [[Product]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['c1_id' => 'product_id']);
     }
 }

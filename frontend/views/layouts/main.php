@@ -33,8 +33,12 @@
 </head>
 
 <body>
-<?php $this->beginBody() ?>
+<?php use yii\widgets\ActiveForm;
+$notifications = \common\models\one_c\Notification::find()->where(['user_id' => Yii::$app->user->identity->c1_id])->all();
+$has_unread_notifications = \common\models\one_c\Notification::find()->where(['user_id' => Yii::$app->user->identity->c1_id, 'is_read' => 0])->exists();
 
+$this->beginBody() ?>
+<input id="user_id" type="hidden" value="<?= Yii::$app->user->identity->c1_id ?>">
 <!-- Page content start  -->
 <div class="page-content">
 
@@ -104,40 +108,34 @@
                     </div>
                 </div>
             </li>
-            <li class="dropdown d-none d-sm-block">
+            <li class="dropdown d-none d-sm-block" id="notification_drop">
                 <a href="#" id="notifications" data-toggle="dropdown" aria-haspopup="true">
                     <i class="icon-bell"></i>
-                    <span class="count-label"></span>
+                    <?php if($has_unread_notifications) {
+                        echo '<span class="count-label"></span>';
+                    } ?>
+
                 </a>
                 <div class="dropdown-menu dropdown-menu-right lrg" aria-labelledby="notifications">
                     <div class="dropdown-menu-header">
                         Інформаційні статуси (10)
                     </div>
-                    <ul class="header-notifications">
-                        <li>
+                    <ul class="header-notifications" id="header-notifications">
+                        <?php foreach($notifications as $notification): ?>
+                        <li is_read="<?= $notification->is_read ?>" id="<?= $notification->c1_id ?>" >
                             <a href="#">
                                 <div class="user-img away">
                                     <img src="/img/user2.png" alt="User">
                                 </div>
                                 <div class="details">
-                                    <div class="user-title">Ваш профіль підтверждено</div>
-                                    <div class="noti-details">Ваш профіль підтверджено</div>
-                                    <div class="noti-date">Бер 11, 07:30 </div>
+                                    <div class="user-title"><?= $notification->title ?></div>
+                                    <div class="noti-details"><?= $notification->description ?></div>
+                                    <div class="noti-date"><?= $notification->timestamp ?> </div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="user-img busy">
-                                    <img src="/img/user2.png" alt="User">
-                                </div>
-                                <div class="details">
-                                    <div class="user-title">Отримано платіж</div>
-                                    <div class="noti-details">Отримано ваш платіж на суму 150 000 грн</div>
-                                    <div class="noti-date">Бер 10, 12:00</div>
-                                </div>
-                            </a>
-                        </li>
+                        <?php endforeach;?>
+
 
                     </ul>
                 </div>
@@ -157,7 +155,11 @@
                         </div>
                         <a href="#"><i class="icon-user1"></i><font color="#000000">Профіль</font></a>
                         <a href="#"><i class="icon-settings1"></i><font color="#000000">Налаштування</font></a>
-                        <a href="#"><i class="icon-log-out1"></i><font color="#000000">Вийти</font></a>
+                        <?php $form = ActiveForm::begin(['action' =>['/site/logout'], 'id' => 'logout_id', 'method' => 'post',]); ?>
+
+                        <a href="javascript:$('#logout_id').submit();"><i class="icon-log-out1"></i><font color="#000000">Вийти</font></a>
+
+                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </li>
@@ -174,7 +176,21 @@
 </div>
 </header>
 <!-- Header end -->
+<div class="container">
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
 
+    <?php if (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
+</div>
 <!-- Main container start -->
 <div class="main-container">
 

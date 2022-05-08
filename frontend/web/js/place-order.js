@@ -14,6 +14,8 @@ function removerOrderItem(id) {
 
 function template(id, hasDate, hasTime, isWagon) {
     let result = `
+<div id="collapseWithIconOne" class="collapse show" aria-labelledby="withIconOne" data-parent="#withIconsAccordion">
+                                    <div class="accordion-body">
     <div class="row gutters" id="order-item-${id}">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="form-group field-order_item_${id}_product_id required">
@@ -77,7 +79,8 @@ function template(id, hasDate, hasTime, isWagon) {
 
         <button class="btn btn-danger" type="button" onclick="removerOrderItem(${id})">Прибрати</button>
         </div>
-    </div>`;
+    </div></div>
+        </div>`;
 
     return result;
 }
@@ -104,10 +107,17 @@ function addOrderItem() {
 
 }
 
-$("#contract_id").on('change', function () {
-    let contractId = this.value;
+function fillShippingAddress(contractId) {
     let delivery_type = $("#delivery_type").val();
     $.get("/place-order/get-shipping?contract_id=" + contractId + "&delivery_type=" + delivery_type, function (data) {
         filShippingAddresses(data);
-    })
+    });
+}
+
+$("#contract_id").on('change', function () {
+    let contractId = this.value;
+    fillShippingAddress(contractId);
 });
+if ($("#contract_id").val()) {
+    fillShippingAddress($("#contract_id").val());
+}

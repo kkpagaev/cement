@@ -19,12 +19,11 @@ class m211209_045335_create_act_table extends Migration
         }
         $this->createTable('{{%act}}', [
             'id' => $this->primaryKey(),
-            'c1_id' => $this->string(),
             'user_id' => $this->string(),
             'contract_id' => $this->string(),
-            'number' => $this->integer()->notNull(),
+            'number' => $this->integer(),
             'date_from' => $this->date()->notNull(),
-            'data_to' => $this->date()->notNull(),
+            'date_to' => $this->date()->notNull(),
             'filepath' => $this->string(),
         ], $tableOptions);
 //        $this->addForeignKey('act-user_id', 'act', 'user_id', 'user', 'c1_id');

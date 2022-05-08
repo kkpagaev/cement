@@ -10,12 +10,12 @@ class NpsAnswerController extends Controller
 {
     public function actionCreate()
     {
-        $model = NpsAnswer::find()->where(['user_id' => Yii::$app->user->id])->one();
+        $model = NpsAnswer::find()->where(['user_id' => Yii::$app->user->getIdentity()->c1_id])->one();
         if ($model != null) {
             return $this->redirect(['/']);
         }
         $model = new NpsAnswer();
-        $model->user_id = Yii::$app->user->id;
+        $model->user_id = Yii::$app->user->getIdentity()->c1_id;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->validate()) {
             if ($model->save()) {

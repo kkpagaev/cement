@@ -19,7 +19,6 @@ class m211209_045306_create_invoice_table extends Migration
         }
         $this->createTable('{{%invoice}}', [
             'id' => $this->bigPrimaryKey(),
-            'c1_id' => $this->string(),
             // ASK MARK!!!
             'status' => $this->tinyInteger()->defaultValue(0),
             'user_id' => $this->string(),

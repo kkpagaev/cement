@@ -14,6 +14,7 @@ use common\models\one_c\PickupAddress;
 use common\models\one_c\Product;
 use common\models\one_c\Report;
 use common\models\one_c\ShippingAddress;
+use common\models\one_c\Station;
 use common\models\one_c\User;
 use common\models\one_c\WagonType;
 use common\services\one_c\Bridgeable1C;
@@ -57,7 +58,8 @@ class Export extends \yii\db\ActiveRecord
         10 => User::class,
         11 => OrderItems::class,
         12 => FinalRecipient::class,
-        13 => Consignee::class
+        13 => Consignee::class,
+        14 => Station::class,
     ];
 
     public static function export(Bridgeable1C $resource, string $user_id, int $action, bool $preSave = false)

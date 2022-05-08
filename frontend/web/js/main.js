@@ -63,7 +63,16 @@ $('.todo-body').on('click', 'li.todo-list', function() {
     $(this).toggleClass('done');
 });
 
-
+$('#notification_drop').hover(function () {
+    $("#header-notifications > li[is_read='0']").each(function (child) {
+        let id = $(this).attr('id');
+        let user_id = $("#user_id").val();
+        $.get({
+            'url': '/api/read-notification?user_id=' + user_id + '&notification_id=' + id
+        });
+        $(this).attr('is_read', 1);
+    });
+});
 
 // Tasks
 (function($) {

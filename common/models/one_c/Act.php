@@ -2,6 +2,7 @@
 
 namespace common\models\one_c;
 
+use Carbon\Carbon;
 use common\services\one_c\models\Bridgeable1CActiveRecord;
 use Yii;
 
@@ -13,7 +14,7 @@ use Yii;
  * @property int $contract_id
  * @property int $number
  * @property string $date_from
- * @property string $data_to
+ * @property string $date_to
  * @property string $filepath
  *
  * @property Contract $contract
@@ -32,22 +33,41 @@ class Act extends Bridgeable1CActiveRecord
     {
         return 'act';
     }
+    const SCENARIO_1C_REQUEST = 0;
 
+
+    public function scenarios()
+    {
+
+        return array_merge(parent::scenarios(), [
+            self::SCENARIO_1C_REQUEST => [
+                'user_id',
+                'contract_id',
+                'date_from',
+                'date_to',
+            ],
+        ]);
+    }
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['user_id', 'contract_id', 'number', 'date_from', 'data_to'], 'required'],
-            [[ 'number'], 'integer'],
-            [['c1_id'], 'string'],
-
-            [['date_from', 'data_to'], 'safe'],
+            [['user_id', 'contract_id', 'date_from', 'date_to'], 'required'],
+            [[ 'number'], 'string'],
+            [['date_from'], 'date', 'format' => 'php:Y-m-d'],
+            [['date_to'], 'date', 'format' => 'php:Y-m-d'],
             [['filepath', 'user_id', 'contract_id',], 'string', 'max' => 255],
+            ['date_to','validateDates'],
         ];
     }
 
+    public function validateDates(){
+        if(!Carbon::create($this->date_from)->lessThan(Carbon::create($this->date_to))){
+            $this->addError('date_from','Дата від має бути меншою за Дату до');
+        }
+    }
     /**
      * {@inheritdoc}
      */
@@ -58,8 +78,8 @@ class Act extends Bridgeable1CActiveRecord
             'user_id' => 'User ID',
             'contract_id' => 'Contract ID',
             'number' => 'Number',
-            'date_from' => 'Data From',
-            'data_to' => 'Data To',
+            'date_from' => 'Date From',
+            'date_to' => 'Date To',
             'filepath' => 'Filepath',
         ];
     }

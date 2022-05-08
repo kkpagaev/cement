@@ -20,7 +20,12 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
       "ext-json": "*",
         "yiisoft/yii2-jui": "^2.0",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "nesbot/carbon": "^2.58",
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "yiisoft/yii2-bootstrap": "^2.0",
+        "udokmeci/yii2-phone-validator": "^1.0",
+        "kartik-v/yii2-validators": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -70,7 +70,7 @@ class ShippingAddress extends Bridgeable1CActiveRecord
      */
     public function getAddressStation()
     {
-        return $this->hasOne(Station::className(), ['id' => 'address_station_id']);
+        return $this->hasOne(Station::className(), ['c1_id' => 'address_station_id']);
     }
 
     /**

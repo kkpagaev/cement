@@ -132,294 +132,88 @@ $this->title = 'My Yii Application';
                         </tr>
                         </thead>
                         <tbody>
+                        <?php foreach ($orders as $order): ?>
+
+                            <tr>
+                                <td>
+                                    <div class="project-details">
 
 
-                        <tr>
-                            <td>
-                                <div class="project-details">
-
-
-                                    <div class="project-info">
-                                        <p> № 321212 від 11.03.2021</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>У обробці</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <div class="status approved">
-                                            <i class=""></i> ПЦ 2 АШ 400
+                                        <div class="project-info">
+                                            <p> № <?php echo $order->id ?> від <?php echo $order->id ?></p>
+                                            <p></p>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Авто доставка</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Дніпро, Леніна 2</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <font color="#000000"><a href="vsi-zayavky.html">Детальніше...</a></font>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="project-details">
-
-
-                                    <div class="project-info">
-                                        <p> № 321212 від 11.03.2021</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>У обробці</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <div class="status approved">
-                                            <i class=""></i> ПЦ 2 АШ 400
+                                </td>
+                                <td>
+                                    <div class="project-details">
+                                        <div class="project-info">
+                                            <p>
+                                                <?php if($order->status == 0): ?>
+                                                    У обробці
+                                                <?php else: ?>
+                                                    Опрацьовано
+                                                <?php endif; ?>
+                                            </p>
+                                            <p></p>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Авто доставка</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Дніпро, Леніна 2</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <font color="#000000"><a href="vsi-zayavky.html">Детальніше...</a></font>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>
-                                <div class="project-details">
-
-
-                                    <div class="project-info">
-                                        <p> № 321212 від 11.03.2021</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>У обробці</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <div class="status approved">
-                                            <i class=""></i> ПЦ 2 АШ 400
+                                </td>
+                                <td>
+                                    <div class="project-details">
+                                        <div class="project-info">
+                                            <div class="status approved">
+                                                <i class=""></i> ПЦ 2 АШ 400
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Авто доставка</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
+                                <td>
+                                    <div class="project-details">
+                                        <div class="project-info">
+                                            <p>  <?php if($order->delivery_type == 0): ?>
+                                                    Авто доставка
 
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Дніпро, Леніна 2</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <font color="#000000"><a href="vsi-zayavky.html">Детальніше...</a></font>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>
-                                <div class="project-details">
-
-
-                                    <div class="project-info">
-                                        <p> № 321212 від 11.03.2021</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>У обробці</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <div class="status approved">
-                                            <i class=""></i> ПЦ 2 АШ 400
+                                                <?php elseif($order->delivery_type == 1): ?>
+                                                    Самовивіз
+                                                <?php else: ?>
+                                                    Доставка ЗТ
+                                                <?php endif; ?></p>
+                                            <p></p>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Авто доставка</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
+                                <td>
+                                    <div class="project-details">
+                                        <div class="project-info">
+                                            <p>
+                                                <?php if($order->delivery_type == 0): ?>
+                                                    <?php echo $order->shippingAdress->address_auto ?>
+                                                <?php elseif($order->delivery_type == 1): ?>
+                                                    <?php echo $order->pickupAddress->address ?>
+                                                <?php else: ?>
+                                                    <?php echo $order->shippingAdress->addressStation->fullname ?>
 
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Дніпро, Леніна 2</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <font color="#000000"><a href="vsi-zayavky.html">Детальніше...</a></font>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>
-                                <div class="project-details">
-
-                                    <div class="project-info">
-                                        <p> № 321212 від 11.03.2021</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>У обробці</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <div class="status approved">
-                                            <i class=""></i> ПЦ 2 АШ 400
+                                                <?php endif; ?></p>
+                                            <p></p>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Авто доставка</p>
-                                        <p></p>
+                                </td>
+                                <td>
+                                    <div class="project-details">
+                                        <div class="project-info">
+                                            <font color="#000000"><a href="/place-order">Детальніше...</a></font>
+                                            <p></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            </tr>
 
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <p>Дніпро, Леніна 2</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project-details">
-                                    <div class="project-info">
-                                        <font color="#000000"><a href="vsi-zayavky.html">Детальніше...</a></font>
-                                        <p></p>
-                                    </div>
-                                </div>
+                        <?php endforeach; ?>
 
 
-                            </td>
-
-                            </td>
-
-                        </tr>
 
                         </tbody>
                     </table>
