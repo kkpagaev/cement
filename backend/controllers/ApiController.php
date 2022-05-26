@@ -7,6 +7,7 @@ use common\models\one_c\Product;
 use common\services\one_c\models\Export;
 use Yii;
 use yii\helpers\VarDumper;
+use yii\web\BadRequestHttpException;
 
 class ApiController extends \yii\web\Controller
 {
@@ -18,7 +19,8 @@ class ApiController extends \yii\web\Controller
             'verbs' => [
                 'class' => \yii\filters\VerbFilter::class,
                 'actions' => [
-                    'create' => ['POST'],
+                    'import' => ['POST'],
+                    'export' => ['GET'],
                 ],
             ],
         ];
@@ -28,6 +30,9 @@ class ApiController extends \yii\web\Controller
     {
         $request = Yii::$app->request;
         $data = json_decode(($request->getRawBody()), true);
+        if(!$data || $data == []) {
+            throw new BadRequestHttpException;
+        }
         $errors = [];
         foreach ($data as $modelJson) {
             $import = new Import();
