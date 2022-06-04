@@ -12,6 +12,7 @@ use Yii;
  * @property int|null $status
  * @property int $user_id
  * @property string|null $number
+ * @property string $order_id
  * @property string $data
  * @property string|null $filepath
  *
@@ -41,7 +42,7 @@ class Invoice extends Bridgeable1CActiveRecord
             [['user_id', 'data'], 'required'],
             [['data'], 'safe'],
 
-            [['number', 'user_id', 'filepath', 'product_id'], 'string', 'max' => 255],
+            [['number', 'user_id', 'filepath', 'product_id', 'order_id'], 'string', 'max' => 255],
         ];
     }
 

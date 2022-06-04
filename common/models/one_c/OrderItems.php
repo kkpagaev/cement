@@ -124,7 +124,7 @@ class OrderItems extends Bridgeable1CActiveRecord
      */
     public function getProduct()
     {
-        return $this->hasOne(Product::class, ['id' => 'product_id']);
+        return $this->hasOne(Product::class, ['c1_id' => 'product_id']);
     }
 
     /**

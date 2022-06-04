@@ -28,7 +28,7 @@ function template(id, hasDate, hasTime, isWagon) {
         <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="form-group">
                 <div class="form-group field-order_item_${id}_weight required">
-                    <input type="text" id="order_item_${id}_weight" class="form-control" name="Item[${id}][weight]" placeholder="Вага" aria-required="true">
+                    <input type="number" id="order_item_${id}_weight" class="form-control" name="Item[${id}][weight]" placeholder="Вага" aria-required="true">
                     <div class="help-block"></div>
                 </div>                                       
             </div>
@@ -40,7 +40,7 @@ function template(id, hasDate, hasTime, isWagon) {
             <div class="form-group">
                 <div class="form-group field-order_item_${id}_order_date">
     
-                    <input type="text" id="order_item_${id}_order_date" class="form-control" name="Item[${id}][order_date]" placeholder="Дата">
+                    <input type="date" id="order_item_${id}_order_date" class="form-control" name="Item[${id}][order_date]" placeholder="Дата">
     
                     <div class="help-block"></div>
                 </div>
@@ -54,7 +54,7 @@ function template(id, hasDate, hasTime, isWagon) {
             <div class="form-group">
                 <div class="form-group">
                     <div class="form-group field-order_item_${id}_order_time">
-                        <input type="text" id="order_item_${id}_order_time" class="form-control" name="Item[${id}][order_time]" placeholder="Час">
+                        <input type="time" id="order_item_${id}_order_time" class="form-control" name="Item[${id}][order_time]" placeholder="Час">
                         <div class="help-block"></div>
                     </div>                                                
                  </div>

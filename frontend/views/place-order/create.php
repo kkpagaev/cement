@@ -8,6 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $contracts array */
 /* @var $pickupAddresses array */
 /* @var $recipients array */
+$this->title = 'Розмістини заявку';
 ?>
 
 
@@ -209,7 +210,9 @@ use yii\widgets\ActiveForm;
                                                     <?= $form->field($order_item, "weight")->label(false)->textInput([
                                                         'id' => "order_item_{$id}_weight",
                                                         'name' => "Item[$id][weight]",
-                                                        'placeholder' => "Вага"
+                                                        'placeholder' => "Вага",
+                                                        'type' => 'number'
+
 
                                                     ]) ?>
                                                 </div>
@@ -220,7 +223,8 @@ use yii\widgets\ActiveForm;
                                                     <?= $form->field($order_item, "order_date")->label(false)->textInput([
                                                         'id' => "order_item_{$id}_order_date",
                                                         'name' => "Item[$id][order_date]",
-                                                        'placeholder' => "Дата"
+                                                        'placeholder' => "Дата",
+                                                        'type' => 'date'
                                                     ]) ?>
                                                 </div>
 
@@ -234,7 +238,9 @@ use yii\widgets\ActiveForm;
                                                         <?= $form->field($order_item, "order_time")->label(false)->textInput([
                                                             'id' => "order_item_{$id}_order_time",
                                                             'name' => "Item[$id][order_time]",
-                                                            'placeholder' => "Час"
+                                                            'placeholder' => "Час",
+                                                            'type' => 'time'
+
                                                         ]) ?>
                                                     </div>
                                                 </div>
@@ -475,7 +481,8 @@ ActiveForm::end() ?>
                                                     <?= $form->field($order_item, "weight")->label(false)->textInput([
                                                         'id' => "order_item_{$id}_weight",
                                                         'name' => "Item[$id][weight]",
-                                                        'placeholder' => "Вага"
+                                                        'placeholder' => "Вага",
+                                                        'type' => 'number'
 
                                                     ]) ?>
                                                 </div>
@@ -486,7 +493,9 @@ ActiveForm::end() ?>
                                                     <?= $form->field($order_item, "order_date")->label(false)->textInput([
                                                         'id' => "order_item_{$id}_order_date",
                                                         'name' => "Item[$id][order_date]",
-                                                        'placeholder' => "Дата"
+                                                        'placeholder' => "Дата",
+                                                        'type' => 'date'
+
                                                     ]) ?>
                                                 </div>
 
@@ -743,7 +752,8 @@ ActiveForm::end() ?>
                                                     <?= $form->field($order_item, "weight")->label(false)->textInput([
                                                         'id' => "order_item_{$id}_weight",
                                                         'name' => "Item[$id][weight]",
-                                                        'placeholder' => "Вага"
+                                                        'placeholder' => "Вага",
+                                                        'type' => 'number'
 
                                                     ]) ?>
                                                 </div>

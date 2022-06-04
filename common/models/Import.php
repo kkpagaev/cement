@@ -33,9 +33,10 @@ class Import extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'model_type', 'action'], 'required'],
-            [['model_type', 'model_id', 'action'], 'integer'],
+            [['model_type', 'action'], 'integer'],
             [['data'], 'string'],
+            [['model_id'], 'string'],
+            [['error'], 'string'],
             [['user_id'], 'string', 'max' => 255],
         ];
     }
@@ -89,7 +90,6 @@ class Import extends \yii\db\ActiveRecord
             unset($file);
             unset($data['data_file']);
         }
-
 
         $model->attributes = ($data);
         try {

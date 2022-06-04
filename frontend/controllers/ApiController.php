@@ -12,7 +12,12 @@ class ApiController extends \yii\web\Controller
 
         $user_id = $this->request->get('user_id');
         $notification_id = $this->request->get('notification_id');
+
+
         $not = Notification::find()->where(['user_id' => $user_id, 'c1_id' =>$notification_id])->one();
+        if ($not->is_read == 1) {
+            return  $this->asJson("already read");
+        }
         $not->is_read = 1;
         $exp = new Export();
         $export = Export::export($not, $user_id, Export::ACTION_UPDATE);

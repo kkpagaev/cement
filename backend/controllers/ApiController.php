@@ -36,14 +36,23 @@ class ApiController extends \yii\web\Controller
         $errors = [];
         foreach ($data as $modelJson) {
             $import = new Import();
-            $import->attributes = $modelJson;
-            $import->data = json_encode($modelJson['data']);
+            $import->user_id = strval($modelJson['user_id']);
+            $import->model_id = $modelJson['model_id'];
+            $import->action = $modelJson['action'];
+            $import->model_type = $modelJson['model_type'];
+            $data = $modelJson['data'];
+            unset($data['data_file']);
+            $import->data = json_encode($data);
             $import->save();
+            $import->data = json_encode($modelJson['data']);
+
             if($error = $import->process()) {
                 $errors[] = [
                     'entity' => $modelJson,
                     'message' => $error
                 ];
+                $import->error = json_encode($error);
+                $import->save();
             }
         }
         return $this->asJson($errors);

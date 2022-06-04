@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+$this->title = 'Заявки';
 ?>
 
 
@@ -78,7 +79,7 @@
                                     <div class="project-details">
                                         <div class="project-info">
                                             <div class="status approved">
-                                                <i class=""></i> ПЦ 2 АШ 400
+                                                <i class=""></i><?php echo $order->productsPreview(); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -232,7 +233,7 @@
                                     <div class="project-details">
                                         <div class="project-info">
                                             <div class="status approved">
-                                                <i class=""></i> ПЦ 2 АШ 400
+                                                <i class=""></i> <?php echo $order->productsPreview(); ?>
                                             </div>
                                         </div>
                                     </div>

@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/img/fav.png" />
 
     <!-- Title -->
-    <title>Адмін кабінет клієнта</title>
+    <title>Авторизуватися</title>
 
 
     <!-- *************

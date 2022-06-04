@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+$this->title = 'Опитування клієнтів';
 ?>
 <div class="accordion-container">
 

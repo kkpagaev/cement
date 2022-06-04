@@ -97,7 +97,7 @@ class User extends Bridgeable1CActiveRecord implements IdentityInterface
     public function rules(): array
     {
         return [
-            [['first_name', 'last_name', 'middle_name', 'email', 'password'], 'required'],
+            [['email'], 'required'],
             [['first_name', 'last_name', 'middle_name', 'email', 'password'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['email'], 'unique'],
@@ -211,7 +211,9 @@ class User extends Bridgeable1CActiveRecord implements IdentityInterface
 
     public function beforeSave($insert) {
         if ($this->isAttributeChanged('password')) {
-            $this->setPassword($this->password);
+            if($this->password) {
+                $this->setPassword($this->password);
+            }
         }
 
         return parent::beforeSave($insert);

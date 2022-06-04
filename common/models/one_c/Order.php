@@ -57,8 +57,10 @@ class Order extends Bridgeable1CActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'delivery_type', 'contract_id', 'invoice_needed'], 'required'],
+            [['user_id', 'delivery_type', 'contract_id'], 'required'],
             [['status', 'delivery_type', 'invoice_needed'], 'integer'],
+            [['invoice_needed'], 'default', 'value'=> 0],
+
             [['user_id', 'contract_id', 'pickup_address_id', 'shipping_address_id', 'final_recipient_id', 'consignee_id'], 'string', 'min' => 1,],
             [['consignee_fullname'], 'string', 'min' => 5, 'max' => 255],
             [['driver_info', 'consignee_branch', 'column_7'], 'string', 'min' => 2, 'max' => 1000],
@@ -207,6 +209,17 @@ class Order extends Bridgeable1CActiveRecord
         return $data;
     }
 
+    public function productsPreview() {
+        $result = '';
+        $products = OrderItems::find()->where(['order_id' => $this->id])->with('product')->all();
+        foreach ($products as $product) {
+            $result .= ', ' . $product->product->title;
+        }
+        $result[0] = ' ';
+
+        return $result;
+
+    }
     /**
      * Gets query for [[PickupAddress]].
      *

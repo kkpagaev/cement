@@ -11,18 +11,5 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
 
-    ],
-    'as beforeRequest' => [  //if guest user access site so, redirect to login page.
-        'class' => 'yii\filters\AccessControl',
-        'rules' => [
-            [
-                'actions' => ['login', 'error', 'password', 'export', 'import'],
-                'allow' => true,
-            ],
-            [
-                'allow' => true,
-                'roles' => ['@'],
-            ],
-        ],
-    ],
+    ]
 ];

@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/img/fav.png" />
 
     <!-- Title -->
-    <title>Адмін кабінет клієнта</title>
+    <title><?= yii\helpers\Html::encode($this->title) ?></title>
 
 
     <!-- *************
@@ -46,7 +46,7 @@ $this->beginBody() ?>
         <div class="toggle-btns">
 
             <div class="logo">
-                <a href="https://krcement.com"><img src="/img/Безымянный-1.png" alt="Logo"></a>
+                <a href="/"><img src="/img/Безымянный-1.png" alt="Logo"></a>
             </div>
 
         </div>

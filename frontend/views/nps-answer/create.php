@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 
 use yii\widgets\ActiveForm;
-
+$this->title = 'Опитування клієнтів';
 ?>
 <div class="main-container">
 

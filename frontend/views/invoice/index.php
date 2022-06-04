@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+$this->title = 'Рахунок';
 ?>
 <div class="main-container-1">
 

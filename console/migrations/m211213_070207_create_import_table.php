@@ -20,10 +20,10 @@ class m211213_070207_create_import_table extends Migration
         }
         $this->createTable('{{%import}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->string()->notNull(),
-            'model_type' => $this->tinyInteger()->notNull(),
+            'user_id' => $this->string(),
+            'model_type' => $this->tinyInteger(),
             'model_id' => $this->string(),
-            'action' => $this->tinyInteger()->notNull(),
+            'action' => $this->tinyInteger(),
             'data' => $this->text(),
         ], $tableOptions);
 

@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Кривий Ріг цемент';
 ?>
 <div
         class="row gutters
@@ -163,7 +163,7 @@ $this->title = 'My Yii Application';
                                     <div class="project-details">
                                         <div class="project-info">
                                             <div class="status approved">
-                                                <i class=""></i> ПЦ 2 АШ 400
+                                                <i class=""></i> <?php echo $order->productsPreview(); ?>
                                             </div>
                                         </div>
                                     </div>
