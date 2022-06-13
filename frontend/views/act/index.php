@@ -84,7 +84,7 @@ $this->title = 'Акт звірки';
                                                 'inputOptions' => [
                                                     'placeholder' => 'Дата від',
                                                     'class' => 'form-control',
-                                                    'id' => 'date_to'
+                                                    'id' => 'date_from'
                                                 ]
                                             ])->label(false) ?>
                                         </div>
@@ -97,7 +97,7 @@ $this->title = 'Акт звірки';
                                                 'inputOptions' => [
                                                     'placeholder' => 'Дата до',
                                                     'class' => 'form-control',
-                                                    'id' => 'date_from'
+                                                    'id' => 'date_to'
                                                 ]
                                             ])->label(false) ?>
                                         </div>

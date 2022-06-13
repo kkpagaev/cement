@@ -110,6 +110,7 @@ class SliderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $upload = new UploadForm();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -117,6 +118,7 @@ class SliderController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'upload' => $upload,
         ]);
     }
 

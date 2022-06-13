@@ -33,21 +33,21 @@ class Act extends Bridgeable1CActiveRecord
     {
         return 'act';
     }
-    const SCENARIO_1C_REQUEST = 0;
+    // const SCENARIO_1C_REQUEST = "1c";
 
 
-    public function scenarios()
-    {
+    // public function scenarios()
+    // {
 
-        return array_merge(parent::scenarios(), [
-            self::SCENARIO_1C_REQUEST => [
-                'user_id',
-                'contract_id',
-                'date_from',
-                'date_to',
-            ],
-        ]);
-    }
+    //     return array_merge(parent::scenarios(), [
+    //         self::SCENARIO_1C_REQUEST => [
+    //             'user_id',
+    //             'contract_id',
+    //             'date_from',
+    //             'date_to',
+    //         ],
+    //     ]);
+    // }
     /**
      * {@inheritdoc}
      */
@@ -55,17 +55,18 @@ class Act extends Bridgeable1CActiveRecord
     {
         return [
             [['user_id', 'contract_id', 'date_from', 'date_to'], 'required'],
-            [[ 'number'], 'string'],
+            [['number'], 'string'],
             [['date_from'], 'date', 'format' => 'php:Y-m-d'],
             [['date_to'], 'date', 'format' => 'php:Y-m-d'],
             [['filepath', 'user_id', 'contract_id',], 'string', 'max' => 255],
-            ['date_to','validateDates'],
+            ['date_to', 'validateDates'],
         ];
     }
 
-    public function validateDates(){
-        if(!Carbon::create($this->date_from)->lessThan(Carbon::create($this->date_to))){
-            $this->addError('date_from','Дата від має бути меншою за Дату до');
+    public function validateDates()
+    {
+        if (!Carbon::create($this->date_from)->lessThan(Carbon::create($this->date_to))) {
+            $this->addError('date_from', 'Дата від має бути меншою за Дату до');
         }
     }
     /**

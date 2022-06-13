@@ -268,7 +268,6 @@ $this->title = 'Опитування клієнтів';
     var els = document.getElementsByTagName("a");
     for (var i = 0, l = els.length; i < l; i++) {
         var el = els[i];
-        console.log(el);
         if (el.href === '#finish') {
             el.innerHTML = "dead link";
             el.href = "#";

@@ -7,7 +7,9 @@ main > .container {
     font-size: .9em;
     height: 60px;
 }
-
+.disable-click{
+    pointer-events:none;
+}
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;

@@ -14,6 +14,7 @@ class ActController extends \yii\web\Controller
         $user_id = \Yii::$app->user->getIdentity()->c1_id;
 
         $model = new Act();
+        // $model->scenario = Act::SCENARIO_1C_REQUEST;
         $model->user_id = $user_id;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
