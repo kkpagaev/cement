@@ -10,6 +10,7 @@ use common\models\one_c\Invoice;
 use common\models\one_c\Notification;
 use common\models\one_c\Order;
 use common\models\one_c\OrderItems;
+use common\models\one_c\PaymentSchedule;
 use common\models\one_c\PickupAddress;
 use common\models\one_c\Product;
 use common\models\one_c\Report;
@@ -60,6 +61,7 @@ class Export extends \yii\db\ActiveRecord
         12 => FinalRecipient::class,
         13 => Consignee::class,
         14 => Station::class,
+        15 => PaymentSchedule::class,
     ];
 
     public static function export(Bridgeable1C $resource, string $user_id, int $action, bool $preSave = false)

@@ -110,16 +110,17 @@ class SiteController extends Controller
             return $this->goHome();
         }
         $this->layout = 'login';
-
+        $password = "";
 
         $model = new PasswordForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            var_dump($model->post());
-            return $this->goBack();
+            $password =  $model->post();
+            
         }
 
         return $this->render('password', [
             'model' => $model,
+            'password' => $password,
         ]);
     }
     /**

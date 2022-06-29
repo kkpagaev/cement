@@ -12,7 +12,11 @@ $this->title = 'Отримати пароль';
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-
+    <?php if($password != ""): ?>
+        <div class="row">
+        Ваш пароль: <?= $password?>
+        </div>
+    <?php else: ?>
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
@@ -27,4 +31,6 @@ $this->title = 'Отримати пароль';
             <?php ActiveForm::end(); ?>
         </div>
     </div>
+    <?php endif; ?>
+
 </div>

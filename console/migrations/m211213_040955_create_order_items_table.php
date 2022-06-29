@@ -20,7 +20,6 @@ class m211213_040955_create_order_items_table extends Migration
         }
         $this->createTable('{{%order_items}}', [
             'id' => $this->primaryKey(),
-            'c1_id' => $this->string(),
             'order_id' => $this->string(),
             'product_id' => $this->string(),
             'weight' => $this->integer()->notNull(),

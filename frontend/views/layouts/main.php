@@ -150,7 +150,7 @@ $this->beginBody() ?>
                             <div class="header-user">
                                 <img src="/img/user2.png" alt="Admin Template">
                             </div>
-                            <h5>ТОВ "Цементбуд"</h5>
+                            <h5><?= Yii::$app->user->identity->first_name ?></h5>
                             <p></p>
                         </div>
                         <a href="#"><i class="icon-user1"></i><font color="#000000">Профіль</font></a>
