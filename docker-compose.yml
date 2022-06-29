@@ -39,7 +39,7 @@ services:
     links:
       - mysql:db
     ports:
-      - 8080:80
+      - 22080:80
     environment:
       - PMA_ARBITRARY=1
   web:
