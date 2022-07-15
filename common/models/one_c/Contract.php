@@ -42,6 +42,7 @@ class Contract extends Bridgeable1CActiveRecord
             [['user_id'], 'string'],
             [['c1_id'], 'string'],
             [['date_from'], 'safe'],
+            [['expired_at'], 'safe'],
         ];
     }
 
