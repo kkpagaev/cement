@@ -5,6 +5,7 @@ namespace common\services\one_c\models;
 use common\models\one_c\Act;
 use common\models\one_c\Consignee;
 use common\models\one_c\Contract;
+use common\models\one_c\ContractProductShippingAddress;
 use common\models\one_c\FinalRecipient;
 use common\models\one_c\Invoice;
 use common\models\one_c\Notification;
@@ -62,6 +63,7 @@ class Export extends \yii\db\ActiveRecord
         13 => Consignee::class,
         14 => Station::class,
         15 => PaymentSchedule::class,
+        16 => ContractProductShippingAddress::class,
     ];
 
     public static function export(Bridgeable1C $resource, string $user_id, int $action, bool $preSave = false)
