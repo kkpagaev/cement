@@ -1,9 +1,7 @@
 function filShippingAddresses(shipping_address) {
     let select = $("#order-shipping_address_id");
     select.empty();
-    console.log(shipping_address);
     Object.keys(shipping_address).forEach((key) => {
-        console.log(key);
         select.append(new Option(shipping_address[key], key));
     })
 }
@@ -117,7 +115,70 @@ function fillShippingAddress(contractId) {
 $("#contract_id").on('change', function () {
     let contractId = this.value;
     fillShippingAddress(contractId);
+    let pickup_address_id = $("#order-pickup_address_id").val();
+    if (pickup_address_id) {
+        fillProducts(contractId, pickup_address_id);
+    }
+    // fillPickupAddresses(contractId);
 });
-if ($("#contract_id").val()) {
-    fillShippingAddress($("#contract_id").val());
+
+$("#order-pickup_address_id").on('change', function () {
+
+    let contractId = $("#contract_id").val();
+    let pickup_address_id = this.value;
+    if(contractId){
+
+        fillProducts(contractId, pickup_address_id);
+    }
 }
+);
+// $("#order-shipping_address_id").on('change', function () {
+//     let ship_id = this.value;
+//     let contract_id = $("#contract_id").val();
+//     fillProducts(contract_id, ship_id);
+// });
+
+// if ($("#contract_id").val()) {
+//     fillShippingAddress($("#contract_id").val());
+// }
+
+
+function fillProducts(contractId, pickup_address_id) {
+    $.get("/place-order/get-products?contract_id=" + contractId + "&pickup_address_id=" + pickup_address_id, function (data) {
+        fillProductsSelect(data);
+    });
+}
+
+function fillProductsSelect(data) {
+    $('.product_id').each(function () {
+        let select = $(this);
+        select.empty();
+        console.log(data);
+        Object.keys(data).forEach((key) => {
+            console.log(key);
+            console.log(data[key].title);
+            select.append(new Option(data[key].title, key));
+        })
+    })
+
+}
+
+// function fillPickupAddresses(contract_id) {
+//     $.get("/place-order/get-pickup-addresses?contract_id=" + contract_id, function (data) {
+//         fillPickupAddressesSelect(data);
+//     });
+
+// }
+
+function fillPickupAddressesSelect(data) {
+
+    $('#order-shipping_address_id').empty();
+    console.log(data);
+    Object.keys(data).forEach((key) => {
+        $('#order-shipping_address_id').append(new Option(data[key].address, key));
+
+    })
+}
+$(document).on('click', '.product_id', function () {
+    console.log('123');
+});

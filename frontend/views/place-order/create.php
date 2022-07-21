@@ -1,5 +1,6 @@
 <?php
 
+use common\models\one_c\Order;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -39,8 +40,10 @@ $this->title = 'Розмістини заявку';
 
 
                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
-                        <div class="social-tile">
-                            <div class="social-icon bg-info">
+                        <div class="social-tile" >
+                            
+                            <div class="social-icon bg-info" 
+                            <?php if($model->scenario == Order::SCENARIO_AUTO) echo 'style="background-color: #007bff !important;"'; ?>>
                                 <a href="/place-order/auto"><i class="icon-truck"></i></a>
                             </div>
                             <div>Доставка Авто</div>
@@ -49,7 +52,9 @@ $this->title = 'Розмістини заявку';
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
                         <div class="social-tile">
-                            <div class="social-icon bg-info">
+                            <div class="social-icon bg-info"
+                            <?php if($model->scenario == Order::SCENARIO_SELF_PICKUP) echo 'style="background-color: #007bff !important;"'; ?>
+                            >
                                 <a href="/place-order/selfpickup"><i class="icon-truck"></i> </a>
 
                             </div>
@@ -59,7 +64,10 @@ $this->title = 'Розмістини заявку';
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
                         <div class="social-tile">
-                            <div class="social-icon bg-info">
+                            <div class="social-icon bg-info"
+                            <?php if($model->scenario == Order::SCENARIO_RAILWAY) echo 'style="background-color: #007bff !important;"'; ?>
+                            
+                            >
                                 <a href="/place-order/railway"><i class="icon-truck"></i></a>
                             </div>
                             <div>Доставка ЗТ</div>
@@ -200,6 +208,8 @@ $this->title = 'Розмістини заявку';
                                                         $products,
                                                         [
                                                             'id' => "order_item_{$id}_product_id",
+                                                            'class' => 'form-control product_id',
+
                                                             'name' => "Item[$id][product_id]",
                                                         ]  // options
                                                     )->label(false);
@@ -300,18 +310,6 @@ $this->title = 'Розмістини заявку';
                                             </div>
                                         </div>
 
-
-                                        <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12">
-                                            <div class="form-group">
-                                                <label for="inputName">Кінцевий отримувач</label>
-
-                                                <?php echo $form->field($model->order, 'final_recipient_id')
-                                                    ->dropDownList(
-                                                        $recipients
-                                                    )->label(false);
-                                                ?>
-                                            </div>
-                                        </div>
 
                                     </div>
 
@@ -471,6 +469,8 @@ ActiveForm::end() ?>
                                                         $products,
                                                         [
                                                             'id' => "order_item_{$id}_product_id",
+                                                            'class' => 'form-control product_id',
+
                                                             'name' => "Item[$id][product_id]",
                                                         ]  // options
                                                     )->label(false);
@@ -705,19 +705,20 @@ ActiveForm::end() ?>
                                                 ?>
                                             </div>
                                         </div>
-
+<!-- 
                                         <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12">
                                             <div class="form-group">
                                                 <label for="inputName">Адреса вантажоодержувача</label>
-                                                <?php echo $form->field($model->order, 'shipping_address_id')
+                                                <?php 
+                                                /* echo $form->field($model->order, 'shipping_address_id')
                                                     ->dropDownList(
                                                         [],
                                                         array('prompt' => 'Оберіть Адресу вантажоодержувача')  // options
                                                     )->label(false);
-                                                ?>
+                                                */?>
                                             </div>
                                         </div>
-
+ -->
 
                                     </div>
                                 </div>
@@ -742,6 +743,7 @@ ActiveForm::end() ?>
                                                         $products,
                                                         [
                                                             'id' => "order_item_{$id}_product_id",
+                                                            'class' => 'form-control product_id',
                                                             'name' => "Item[$id][product_id]",
                                                         ]  // options
                                                     )->label(false);

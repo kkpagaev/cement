@@ -74,7 +74,7 @@ class Order extends Bridgeable1CActiveRecord
                 'shipping_address_id',
                 'consignee_fullname',
                 'consignee_phone',
-                'final_recipient_id'
+                // 'final_recipient_id'
             ], 'required', 'on' => self::SCENARIO_AUTO],
             [['consignee_phone'], 'string', 'min' => 9, 'max'=> 32],
             [[

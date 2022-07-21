@@ -15,6 +15,8 @@ use common\models\one_c\Station;
 use common\models\one_c\WagonType;
 use common\services\one_c\Bridgeable1C;
 use common\services\one_c\models\Export;
+use Yii;
+use yii\db\Expression;
 
 class PlaceOrderController extends \yii\web\Controller
 {
@@ -28,7 +30,7 @@ class PlaceOrderController extends \yii\web\Controller
 
     private function getContracts($user_id)
     {
-        $contracts = Contract::find()->where(['user_id' => $user_id])->all();
+        $contracts = Contract::find()->where(['user_id' => $user_id])->where(['>', 'expired_at', new Expression('NOW()')])->all();
         $result = [];
         foreach ($contracts as $contract) {
             $result[$contract->c1_id] = "Договір №" . $contract->number . " від " . $contract->date_from;
@@ -50,7 +52,8 @@ class PlaceOrderController extends \yii\web\Controller
 
     private function getPickupAddresses()
     {
-        $arr = PickupAddress::find()->all();
+        $user = Yii::$app->user->identity;
+        $arr = PickupAddress::find()->where(['user_id' => $user->c1_id])->all();
         $result = [];
         foreach ($arr as $el) {
             $result[$el->c1_id] = $el->address;
@@ -87,6 +90,30 @@ class PlaceOrderController extends \yii\web\Controller
         }
         return $this->asJson($result);
     }
+
+    public function actionGetProducts()
+    {
+        $sql = "SELECT * FROM `product` WHERE `c1_id` IN (
+                    SELECT `product_id` FROM `product_pickup_address` 
+                    WHERE `product_id` IN (SELECT `product_id` FROM `contract_product` WHERE `contract_id` = :cont_id)
+                    AND `pickup_address_id` = :pickup_id); 
+                );
+        ";
+        $products = Product::findBySql($sql, [
+            ':cont_id' => $this->request->get('contract_id'),
+            ':pickup_id' => $this->request->get('pickup_address_id')
+        ])->all();
+    
+        return $this->asJson($products);
+    }
+
+    public function actionGetPickupAddresses()
+    {
+        $products = PickupAddress::find()->where(['contract_id' => $this->request->get('contract_id')])->all();
+    
+        return $this->asJson($products);
+    }
+
 
     /**
      * @throws \yii\db\Exception
@@ -127,7 +154,7 @@ class PlaceOrderController extends \yii\web\Controller
         if(!$order) {
             return $this->redirect('/place-order');
         }
-
+        
         $export = Export::export($order, $user_id, Export::ACTION_DELETE);
         $export->save();
         $order->delete();
