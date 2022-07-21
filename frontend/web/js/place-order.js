@@ -157,7 +157,7 @@ function fillProductsSelect(data) {
         Object.keys(data).forEach((key) => {
             console.log(key);
             console.log(data[key].title);
-            select.append(new Option(data[key].title, key));
+            select.append(new Option(data[key].title, data[key].c1_id));
         })
     })
 
