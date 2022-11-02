@@ -58,6 +58,9 @@ class Import extends \yii\db\ActiveRecord
 
     public function process()
     {
+        if ($this->model_type > 19) {
+            return 'Model type is not supported';
+        }
         if ($this->action == Export::ACTION_CREATE) {
             return $this->processCreate();
         } else if ($this->action == Export::ACTION_UPDATE) {
@@ -72,13 +75,13 @@ class Import extends \yii\db\ActiveRecord
     {
         $model = $this->getModel();
         $data = $this->getData();
-        if(isset($data['data_file'])) {
-            $file = base64_decode( $data['data_file']);
+        if (isset($data['data_file'])) {
+            $file = base64_decode($data['data_file']);
 
             //the used alias in path is only example.
             //The datetime and random string are used to avoid conflicts
             $filename =  date('Y-m-d-H-i-s') .
-            Yii::$app->security->generateRandomString(64) . '.pdf';
+                Yii::$app->security->generateRandomString(64) . '.pdf';
             $filenamePath = Yii::getAlias(
                 '@frontend/web/uploads/' . $filename
             );
@@ -119,12 +122,14 @@ class Import extends \yii\db\ActiveRecord
     {
         return Export::dataTypes[$this->model_type];
     }
-    private function getModel() {
+    private function getModel()
+    {
         $class = ($this->getModelClass());
         return new $class;
     }
 
-    private function findModel() {
+    private function findModel()
+    {
         $modelClass = $this->getModelClass();
         if ($this->has1cId()) {
             $model = (new $modelClass)::find()->where(['c1_id' => $this->model_id])->one();
@@ -145,8 +150,8 @@ class Import extends \yii\db\ActiveRecord
         $model = $this->findModel();
         if ($model == null) return null;
         $data = $this->getData();
-        if(isset($data['data_file'])) {
-            $file = base64_decode( $data['data_file']);
+        if (isset($data['data_file'])) {
+            $file = base64_decode($data['data_file']);
 
             //the used alias in path is only example.
             //The datetime and random string are used to avoid conflicts

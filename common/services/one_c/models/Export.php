@@ -7,6 +7,7 @@ use common\models\one_c\Consignee;
 use common\models\one_c\Contract;
 use common\models\one_c\ContractProduct;
 use common\models\one_c\FinalRecipient;
+use common\models\one_c\FinalRecipientProduct;
 use common\models\one_c\Invoice;
 use common\models\one_c\Notification;
 use common\models\one_c\Order;
@@ -68,6 +69,7 @@ class Export extends \yii\db\ActiveRecord
         16 => ProductPickupAddress::class,
         17 => ContractProduct::class,
         18 => ShippingAddressPickupAddress::class,
+        19 => FinalRecipientProduct::class,
     ];
 
     public static function export(Bridgeable1C $resource, string $user_id, int $action, bool $preSave = false)
@@ -78,7 +80,7 @@ class Export extends \yii\db\ActiveRecord
         $export->model_type = $resource->getModelType();
         $export->model_id = $resource->getModelId();
         $export->action = $action;
-        if($action != self::ACTION_DELETE) {
+        if ($action != self::ACTION_DELETE) {
             $export->data = json_encode($resource->getModelData());
         }
         $export->save();
