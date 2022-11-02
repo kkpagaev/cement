@@ -83,4 +83,29 @@ class ShippingAddress extends Bridgeable1CActiveRecord
         return $this->hasMany(Order::className(), ['shipment_point_id' => 'id']);
     }
 
+
+    public static function getPlaceOrderShippingAddresses($contract_id, $pickup_id, $deliveryType)
+    {
+        $sql = "SELECT * FROM `shipping_address` WHERE `c1_id` IN 
+        (SELECT `shipping_address_id` FROM `shipping_address_pickup_address` WHERE `pickup_address_id` = :pickup_id)
+        AND `contract_id` = :pickup_id AND `delivery_type` = :delivery_type";
+        $shipping = ShippingAddress::findBySql($sql, [
+            ':cont_id' => $contract_id,
+            ':pickup_id' => $pickup_id,
+            ':delivery_type' => $deliveryType
+        ])->all();
+        $result = [];
+        if ($deliveryType == ShippingAddress::DELIVERY_TYPE_AUTO) {
+            foreach ($shipping as $ship) {
+                $result[$ship->c1_id] = $ship->address_auto;
+            }
+        }
+        if ($deliveryType == ShippingAddress::DELIVERY_TYPE_RAILWAY) {
+            foreach ($shipping as $ship) {
+                $wagonType = Station::find()->where(['c1_id' => $ship->address_station_id])->one();
+                $result[$ship->c1_id] = $wagonType->fullname;
+            }
+        }
+        return $result;
+    }
 }

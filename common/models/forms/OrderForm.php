@@ -23,15 +23,9 @@ class OrderForm extends Model
     public function scenarios()
     {
         return [
-            self::SCENARIO_SELF_PICKUP => [
-
-            ],
-            self::SCENARIO_AUTO => [
-
-            ],
-            self::SCENARIO_RAILWAY => [
-
-            ],
+            self::SCENARIO_SELF_PICKUP => [],
+            self::SCENARIO_AUTO => [],
+            self::SCENARIO_RAILWAY => [],
         ];
     }
 
@@ -41,7 +35,6 @@ class OrderForm extends Model
             [['Order'], 'required'],
             [['Items'], 'safe'],
         ];
-
     }
 
     public function afterValidate()
@@ -77,7 +70,6 @@ class OrderForm extends Model
         $this->_order->status = 0;
         $this->_order->user_id = $user_id;
         if (!$this->validate()) {
-
         }
         foreach ($this->getAllModels() as $model) {
             if (!$model->validate()) {
@@ -150,7 +142,6 @@ class OrderForm extends Model
                 $this->_items[$index] = $item;
             }
         }
-
     }
 
     public function setOrder($order, $merge = false)
@@ -195,5 +186,4 @@ class OrderForm extends Model
         }
         return $this->_items;
     }
-
 }
