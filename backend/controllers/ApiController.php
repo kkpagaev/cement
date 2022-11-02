@@ -30,7 +30,7 @@ class ApiController extends \yii\web\Controller
     {
         $request = Yii::$app->request;
         $data = json_decode(($request->getRawBody()), true);
-        if(!$data || $data == []) {
+        if (!$data || $data == []) {
             throw new BadRequestHttpException;
         }
         $errors = [];
@@ -46,7 +46,7 @@ class ApiController extends \yii\web\Controller
             $import->save();
             $import->data = json_encode($modelJson['data']);
 
-            if($error = $import->process()) {
+            if ($error = $import->process()) {
                 $errors[] = [
                     'entity' => $modelJson,
                     'message' => $error
@@ -70,6 +70,4 @@ class ApiController extends \yii\web\Controller
 
         return $this->asJson($exports);
     }
-
-
 }
