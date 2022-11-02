@@ -16,6 +16,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\one_c\PaymentSchedule;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -72,10 +73,13 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $user_id = \Yii::$app->user->getIdentity()->c1_id;
-
+        $payment = PaymentSchedule::find()->where(['user_id' => $user_id])->limit(2)->all();
+        $shipment_sum = PaymentSchedule::getShipmentSum($user_id);
         $slider = Slider::find()->all();
         return $this->render('index', [
             'slider' => $slider,
+            'shipment_sum' => $shipment_sum,
+            'payments' => $payment,
             'orders' => Order::find()->where(['user_id' => $user_id])->all()
         ]);
     }

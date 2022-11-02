@@ -105,18 +105,18 @@ function addOrderItem() {
 
 }
 
-function fillShippingAddress(contractId) {
+function fillShippingAddress(contractId, pickup_address_id) {
     let delivery_type = $("#delivery_type").val();
-    $.get("/place-order/get-shipping?contract_id=" + contractId + "&delivery_type=" + delivery_type, function (data) {
+    $.get("/place-order/get-shipping?contract_id=" + contractId + "&delivery_type=" + delivery_type + "&pickup_address_id="+pickup_address_id, function (data) {
         filShippingAddresses(data);
     });
 }
 
 $("#contract_id").on('change', function () {
     let contractId = this.value;
-    fillShippingAddress(contractId);
     let pickup_address_id = $("#order-pickup_address_id").val();
     if (pickup_address_id) {
+        fillShippingAddress(contractId, pickup_address_id);
         fillProducts(contractId, pickup_address_id);
     }
     // fillPickupAddresses(contractId);
@@ -126,7 +126,9 @@ $("#order-pickup_address_id").on('change', function () {
 
     let contractId = $("#contract_id").val();
     let pickup_address_id = this.value;
+
     if(contractId){
+        fillShippingAddress(contractId, pickup_address_id);
 
         fillProducts(contractId, pickup_address_id);
     }

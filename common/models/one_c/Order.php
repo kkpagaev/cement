@@ -93,7 +93,7 @@ class Order extends Bridgeable1CActiveRecord
                 'driver_car_trailer_number',
                 'unload_address',
             ], 'required', 'on' => self::SCENARIO_SELF_PICKUP],
-            [['consignee_phone'], 'k-phone', 'countryValue' => 'UA'],//
+            // [['consignee_phone'], 'k-phone', 'countryValue' => 'UA'],//
 
 
         ];

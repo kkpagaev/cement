@@ -177,7 +177,7 @@ $this->title = 'Розмістини заявку';
                                                 <?php
                                                 echo $form->field($model->order, 'shipping_address_id')
                                                     ->dropDownList(
-                                                        [],
+                                                        $shippingAddresses,
                                                         array('prompt' => 'Оберіть Адресу вантажоодержувача')  // options
                                                     )->label(false);
                                                 ?>
@@ -705,20 +705,20 @@ ActiveForm::end() ?>
                                                 ?>
                                             </div>
                                         </div>
-<!-- 
+
                                         <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12">
                                             <div class="form-group">
                                                 <label for="inputName">Адреса вантажоодержувача</label>
                                                 <?php 
-                                                /* echo $form->field($model->order, 'shipping_address_id')
+                                                 echo $form->field($model->order, 'shipping_address_id')
                                                     ->dropDownList(
                                                         [],
                                                         array('prompt' => 'Оберіть Адресу вантажоодержувача')  // options
                                                     )->label(false);
-                                                */?>
+                                                ?>
                                             </div>
                                         </div>
- -->
+
 
                                     </div>
                                 </div>

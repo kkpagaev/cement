@@ -23,12 +23,28 @@ $("#example-basic").steps({
 		let result = true;
 		unique.forEach(function (inputId) {
 			if($(`input[name="${inputId}"]:checked`).length == 0) {
+				$(`input[name="${inputId}"]`).each(function (index) {
+
+					$(this).parent().parent().parent().css('border', '0.2rem solid red');
+
+					
+					console.log($(this));
+				});
 				result = false;
+			} else {
+				$(`input[name="${inputId}"]`).each(function (index) {
+					$(this).parent().parent().parent().css('border', 'none');
+
+				});
 			}
+
 		});
 		$('#example-basic-p-' + currentIndex + ' textarea').each(function (index) {
 			if($(this).val().trim().length == 0) {
-				result = false
+				$(this).css('border', '0.1rem solid red');
+				result = false;
+			} else {
+				$(this).css('border-color', 'gray');
 			}
 		});
 		

@@ -4,8 +4,7 @@
 
 $this->title = 'Кривий Ріг цемент';
 ?>
-<div
-        class="row gutters
+<div class="row gutters
 					">
     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
 
@@ -16,15 +15,14 @@ $this->title = 'Кривий Ріг цемент';
 
 
                 <div class="carousel-inner">
-                    <?php foreach ($slider as $key => $slide): ?>
-                    <div class="carousel-item <?php if($key == 0) echo "active"; ?>">
-                        <img src="<?= $slide->image_filepath ?>" width="600" height="370" class="rounded d-block w-100"
-                             alt="Carousel">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<?= $slide->title ?></h5>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $slide->subtitle ?></p>
+                    <?php foreach ($slider as $key => $slide) : ?>
+                        <div class="carousel-item <?php if ($key == 0) echo "active"; ?>">
+                            <img src="<?= $slide->image_filepath ?>" width="600" height="370" class="rounded d-block w-100" alt="Carousel">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>&nbsp;&nbsp;&nbsp;&nbsp;<?= $slide->title ?></h5>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $slide->subtitle ?></p>
+                            </div>
                         </div>
-                    </div>
                     <?php endforeach; ?>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
@@ -41,57 +39,58 @@ $this->title = 'Кривий Ріг цемент';
 
     </div>
 
+    <?php if (!empty($payments)) : ?>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
 
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-
-        <div class="card h-90">
-            <div class="card-body">
-                <div class="account-settings">
-                    <div class="user-profile">
-                        <div class="user-avatar"></div>
-
-
-                        <h5 class="user name">Мої фінанси</h5>
-
-                        <br>
-
-                        <h5 class="user name">Доступна сума до відвантаження</h5><br>
-                        <h3 class="user-name">1 394 333</h3>
-
-                        <div class="USER-NAME">
-                            <h8>Останні надходження:</h8>
+            <div class="card h-90">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar"></div>
 
 
-                            <div class="USER-NAME">11-06-21:<br>
+                            <h5 class="user name">Мої фінанси</h5>
 
-                                <h9><font strong color="#208451">+ 150 403 грн </font> &nbsp;згідно рахунку №
-                                    433214324425
-                                </h9>
-                                <br>
-                                <h9><font strong color="#208451">+ 150 705 грн </font> &nbsp;згідно рахунку №
-                                    443414324466
-                                </h9>
-                            </div>
-                            <p></p>
-                            <p></p>
                             <br>
 
+                            <h5 class="user name">Доступна сума до відвантаження</h5><br>
+                            <h3 class="user-name"><?= $shipment_sum ?></h3>
 
-                        </div>
-                        <a href="table-hover.html">
-                            <div class="user-name">
-                                <button type="button" id="submit" name="submit" class="btn btn-secondary" align="center"
-                                        margin-right: 25%>&#160;&#160;&#160;&#160;&#160; 1 протермінований рахунок&#160;&#160;&#160;&#160;&#160;&#160
-                                </button>
+                            <div class="USER-NAME">
+                                <h8>Останні надходження:</h8>
+
+
+                                <div class="USER-NAME"><?= $payments[0]->payment_date ?><br>
+                                    <?php foreach ($payments as $payment) : ?>
+                                        <h9>
+                                            <font strong color="#208451">+ <?= $payment->payments_sum ?> </font> &nbsp;згідно рахунку №
+                                            <?= $payment->contract_id ?>
+                                        </h9>
+                                        <br>
+                                    <?php endforeach ?>
+
+                                </div>
                                 <p></p>
-                        </a>
-                        <a href="table-hover.html">
-                            <button type="button" id="submit" name="submit" class="btn btn-primary" align="center"
-                                    margin-right: 25%>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160&#160;&#160;&#160;&#160;&#160&#160;Детальніше&#160;&#160;&#160;&#160;&#160;&#160&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                                &#160;&#160;
-                            </button>
-                        </a>
+                                <p></p>
+                                <br>
+
+
+                            </div>
+                            <a href="/payment-schedule">
+                                <div class="user-name">
+                                    <button type="button" id="submit" name="submit" class="btn btn-secondary" align="center" margin-right: 25%>&#160;&#160;&#160;&#160;&#160; 1 протермінований рахунок&#160;&#160;&#160;&#160;&#160;&#160
+                                    </button>
+                                    <p></p>
+                            </a>
+                            <a href="/payment-schedule">
+                                <button type="button" id="submit" name="submit" class="btn btn-primary" align="center" margin-right: 25%>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160&#160;&#160;&#160;&#160;&#160&#160;Детальніше&#160;&#160;&#160;&#160;&#160;&#160&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                    &#160;&#160;
+                                </button>
+                            </a>
+                        </div>
+
                     </div>
+
 
                 </div>
 
@@ -100,9 +99,7 @@ $this->title = 'Кривий Ріг цемент';
 
 
         </div>
-
-
-    </div>
+    <?php endif; ?>
 </div>
 
 
@@ -122,96 +119,96 @@ $this->title = 'Кривий Ріг цемент';
                 <div class="table-responsive">
                     <table class="table projects-table">
                         <thead>
-                        <tr>
-                            <th>Номер замовлення</th>
-                            <th>Статус</th>
-                            <th>Марка цементу</th>
-                            <th>Тип доставки</th>
-                            <th>Пункт доставки</th>
-                            <th></th>
-                        </tr>
+                            <tr>
+                                <th>Номер замовлення</th>
+                                <th>Статус</th>
+                                <th>Марка цементу</th>
+                                <th>Тип доставки</th>
+                                <th>Пункт доставки</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($orders as $order): ?>
+                            <?php foreach ($orders as $order) : ?>
 
-                            <tr>
-                                <td>
-                                    <div class="project-details">
+                                <tr>
+                                    <td>
+                                        <div class="project-details">
 
 
-                                        <div class="project-info">
-                                            <p> № <?php echo $order->id ?> від <?php echo $order->id ?></p>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project-details">
-                                        <div class="project-info">
-                                            <p>
-                                                <?php if($order->status == 0): ?>
-                                                    У обробці
-                                                <?php else: ?>
-                                                    Опрацьовано
-                                                <?php endif; ?>
-                                            </p>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project-details">
-                                        <div class="project-info">
-                                            <div class="status approved">
-                                                <i class=""></i> <?php echo $order->productsPreview(); ?>
+                                            <div class="project-info">
+                                                <p> № <?php echo $order->id ?> від <?php echo $order->id ?></p>
+                                                <p></p>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="project-details">
-                                        <div class="project-info">
-                                            <p>  <?php if($order->delivery_type == 0): ?>
-                                                    Авто доставка
-
-                                                <?php elseif($order->delivery_type == 1): ?>
-                                                    Самовивіз
-                                                <?php else: ?>
-                                                    Доставка ЗТ
-                                                <?php endif; ?></p>
-                                            <p></p>
+                                    </td>
+                                    <td>
+                                        <div class="project-details">
+                                            <div class="project-info">
+                                                <p>
+                                                    <?php if ($order->status == 0) : ?>
+                                                        У обробці
+                                                    <?php else : ?>
+                                                        Опрацьовано
+                                                    <?php endif; ?>
+                                                </p>
+                                                <p></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="project-details">
-                                        <div class="project-info">
-                                            <p>
-                                                <?php if($order->delivery_type == 0): ?>
-                                                    <?php echo $order->shippingAdress->address_auto ?>
-                                                <?php elseif($order->delivery_type == 1): ?>
-                                                    <?php echo $order->pickupAddress->address ?>
-                                                <?php else: ?>
-                                                    <?php echo $order->shippingAdress->addressStation->fullname ?>
-
-                                                <?php endif; ?></p>
-                                            <p></p>
+                                    </td>
+                                    <td>
+                                        <div class="project-details">
+                                            <div class="project-info">
+                                                <div class="status approved">
+                                                    <i class=""></i> <?php echo $order->productsPreview(); ?>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project-details">
-                                        <div class="project-info">
-                                            <font color="#000000"><a href="/place-order">Детальніше...</a></font>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
 
-                        <?php endforeach; ?>
+                                    <td>
+                                        <div class="project-details">
+                                            <div class="project-info">
+                                                <p> <?php if ($order->delivery_type == 0) : ?>
+                                                        Авто доставка
+
+                                                    <?php elseif ($order->delivery_type == 1) : ?>
+                                                        Самовивіз
+                                                    <?php else : ?>
+                                                        Доставка ЗТ
+                                                    <?php endif; ?></p>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="project-details">
+                                            <div class="project-info">
+                                                <p>
+                                                    <?php if ($order->delivery_type == 0) : ?>
+                                                        <?php echo $order->shippingAdress->address_auto ?>
+                                                    <?php elseif ($order->delivery_type == 1) : ?>
+                                                        <?php echo $order->pickupAddress->address ?>
+                                                    <?php else : ?>
+                                                        <?php echo $order->shippingAdress->addressStation->fullname ?>
+
+                                                    <?php endif; ?></p>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project-details">
+                                            <div class="project-info">
+                                                <font color="#000000"><a href="/place-order">Детальніше...</a></font>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            <?php endforeach; ?>
 
 
 

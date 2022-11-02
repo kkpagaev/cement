@@ -41,6 +41,7 @@ class PaymentSchedule extends Bridgeable1CActiveRecord
             [['payments_days', 'payments_sum', 'shipment_sum'], 'integer'],
             [['payments_days', 'payments_sum', 'shipment_sum'], 'required'],
             [['c1_id'], 'string'],
+            [['user_id'], 'string'],
             [['contract_id'], 'string'],
         ];
     }
@@ -52,6 +53,7 @@ class PaymentSchedule extends Bridgeable1CActiveRecord
     {
         return [
             'id' => 'ID',
+            'user_id' => 'User ID',
             'contract_id' => 'Contract ID',
             'shipment_date' => 'Shipment Date',
             'payment_date' => 'Payment Date',
@@ -59,5 +61,16 @@ class PaymentSchedule extends Bridgeable1CActiveRecord
             'payments_sum' => 'Payments Sum',
             'shipment_sum' => 'Shipment Sum',
         ];
+    }
+
+    public static function getShipmentSum($user_id) {
+        $shipment_sum = PaymentSchedule::find()->where(['user_id' => $user_id])->sum('shipment_sum');
+        $payments_sum  = PaymentSchedule::find()->where(['user_id' => $user_id])->sum('payments_sum');
+        return $shipment_sum - $payments_sum;
+    }
+
+    public function getContract()
+    {
+        return $this->hasOne(Contract::class, ['c1_id' => 'contract_id']);
     }
 }
