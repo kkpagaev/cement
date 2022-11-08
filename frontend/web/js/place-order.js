@@ -12,9 +12,9 @@ function removerOrderItem(id) {
 
 function template(id, hasDate, hasTime, isWagon) {
     let result = `
-<div id="collapseWithIconOne" class="collapse show" aria-labelledby="withIconOne" data-parent="#withIconsAccordion">
+<div class="collapse show" aria-labelledby="withIconOne" data-parent="#withIconsAccordion"  id="order-item-${id}">
                                     <div class="accordion-body">
-    <div class="row gutters" id="order-item-${id}">
+    <div class="row gutters">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="form-group field-order_item_${id}_product_id required">
                 <select id="order_item_${id}_product_id" class="form-control" name="Item[${id}][product_id]" aria-required="true">
