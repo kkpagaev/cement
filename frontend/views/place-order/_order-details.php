@@ -80,6 +80,7 @@ $wagonTypes = (function () {
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
                             <div class="form-group">
+
                                 <div class="form-group">
                                     <?= $form->field($order_item, "order_time")->label(false)->textInput([
                                         'id' => "order_item_{$id}_order_time",
