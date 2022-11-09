@@ -61,6 +61,7 @@ $wagonTypes = (function () {
                                     'placeholder' => "Вага",
                                     'type' => 'number'
 
+
                                 ]) ?>
                             </div>
 
@@ -72,17 +73,31 @@ $wagonTypes = (function () {
                                     'name' => "Item[$id][order_date]",
                                     'placeholder' => "Дата",
                                     'type' => 'date'
-
                                 ]) ?>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <?= $form->field($order_item, "order_time")->label(false)->textInput([
+                                        'id' => "order_item_{$id}_order_time",
+                                        'name' => "Item[$id][order_time]",
+                                        'placeholder' => "Час",
+                                        'type' => 'time'
+
+                                    ]) ?>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+
                             <button class="btn btn-primary" type="button" onclick="addOrderItem()">Додати ще</button>
                         </div>
                     </div>
                 </div>
             </div>
-
         <?php endforeach; ?>
     </div>
 
@@ -96,6 +111,8 @@ $wagonTypes = (function () {
             </a>
         </div>
         <?php foreach ($model->items as $id => $order_item) : ?>
+
+
             <div id="collapseWithIconOne" class="collapse show" aria-labelledby="withIconOne" data-parent="#withIconsAccordion">
                 <div class="accordion-body">
                     <div class="row gutters" id="order-item-0">
@@ -121,7 +138,6 @@ $wagonTypes = (function () {
                                     'placeholder' => "Вага",
                                     'type' => 'number'
 
-
                                 ]) ?>
                             </div>
 
@@ -133,33 +149,17 @@ $wagonTypes = (function () {
                                     'name' => "Item[$id][order_date]",
                                     'placeholder' => "Дата",
                                     'type' => 'date'
+
                                 ]) ?>
-                            </div>
-
-
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3">
-
-                            <div class="form-group">
-
-                                <div class="form-group">
-                                    <?= $form->field($order_item, "order_time")->label(false)->textInput([
-                                        'id' => "order_item_{$id}_order_time",
-                                        'name' => "Item[$id][order_time]",
-                                        'placeholder' => "Час",
-                                        'type' => 'time'
-
-                                    ]) ?>
-                                </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-
                             <button class="btn btn-primary" type="button" onclick="addOrderItem()">Додати ще</button>
                         </div>
                     </div>
                 </div>
             </div>
+
 
         <?php endforeach; ?>
     </div>
