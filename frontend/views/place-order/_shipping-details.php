@@ -4,6 +4,7 @@
 /* @var $model \common\models\forms\OrderForm */
 
 use common\models\one_c\Consignee;
+use common\models\one_c\FinalRecipient;
 use common\models\one_c\Product;
 use common\models\one_c\WagonType;
 
@@ -158,10 +159,10 @@ use common\models\one_c\WagonType;
                         <div class="form-group">
                             <label for="inputName">Вантажоодержувач</label>
 
-                            <?php echo $form->field($model->order, 'consignee_id')
+                            <?php echo $form->field($model->order, 'final_recipient_id')
                                 ->dropDownList(
                                     (function () {
-                                        $arr = Consignee::find()->all();
+                                        $arr = FinalRecipient::find()->where(['user_id' => \Yii::$app->user->getIdentity()->c1_id])->all();
                                         $result = [];
                                         foreach ($arr as $el) {
                                             $result[$el->c1_id] = $el->fullname;

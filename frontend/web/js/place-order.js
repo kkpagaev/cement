@@ -17,7 +17,7 @@ function template(id, hasDate, hasTime, isWagon) {
     <div class="row gutters">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="form-group field-order_item_${id}_product_id required">
-                <select id="order_item_${id}_product_id" class="form-control" name="Item[${id}][product_id]" aria-required="true">
+                <select id="order_item_${id}_product_id" class="product_id form-control" name="Item[${id}][product_id]" aria-required="true">
                 
                 </select>
                 <div class="help-block"></div>
@@ -90,10 +90,10 @@ function orderItemsCount() {
 function addOrderItem() {
     let delivery_type = $("#delivery_type").val();
     let id = orderItemsCount();
-    if (delivery_type == 0) {
+    if (delivery_type == 1) {
         $("#order-items").append(template(id, true, true, false));
         $('#order_item_' + id + '_product_id').html($('#order_item_0_product_id').html());
-    } else if (delivery_type == 1) {
+    } else if (delivery_type == 2) {
         $("#order-items").append(template(id, false, false, true));
         $('#order_item_' + id + '_product_id').html($('#order_item_0_product_id').html());
         $('#order_item_' + id + '_wagon_type_id').html($('#order_item_0_wagon_type_id').html());
@@ -117,10 +117,18 @@ $("#contract_id").on('change', function () {
     let pickup_address_id = $("#order-pickup_address_id").val();
     if (pickup_address_id) {
         fillShippingAddress(contractId, pickup_address_id);
-        fillProducts(contractId, pickup_address_id);
+        fillProducts();
     }
     // fillPickupAddresses(contractId);
 });
+
+$("#order-final_recipient_id").on('change', function () {
+    let final_recipient_id = this.value;
+    if(final_recipient_id) {
+        fillProducts();
+
+    }
+})
 
 $("#order-pickup_address_id").on('change', function () {
 
@@ -130,7 +138,7 @@ $("#order-pickup_address_id").on('change', function () {
     if(contractId){
         fillShippingAddress(contractId, pickup_address_id);
 
-        fillProducts(contractId, pickup_address_id);
+        fillProducts();
     }
 }
 );
@@ -145,9 +153,15 @@ $("#order-pickup_address_id").on('change', function () {
 // }
 
 
-function fillProducts(contractId, pickup_address_id) {
-    $.get("/place-order/get-products?contract_id=" + contractId + "&pickup_address_id=" + pickup_address_id, function (data) {
+function fillProducts() {
+    let contractId = $("#contract_id").val();
+    let pickup_address_id = $("#order-pickup_address_id").val();
+    let delivery_type = $("#delivery_type").val();
+    let final_recipient_id = $("#order-final_recipient_id").val();
+
+    $.get("/place-order/get-products?contract_id=" + contractId + "&pickup_address_id=" + pickup_address_id + '&final_recipient_id=' + final_recipient_id + '&delivery_type=' + delivery_type, function (data) {
         fillProductsSelect(data);
+        console.log('data', data);
     });
 }
 
@@ -183,4 +197,5 @@ function fillPickupAddressesSelect(data) {
 }
 $(document).on('click', '.product_id', function () {
     console.log('123');
+    fillProducts();
 });

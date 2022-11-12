@@ -56,7 +56,9 @@ class PlaceOrderController extends \yii\web\Controller
     {
         $contract_id = $this->request->get('contract_id');
         $pickup_id = $this->request->get('pickup_address_id');
-        $products = Product::getPlaceOrderProducts($contract_id, $pickup_id);
+        $delivery_type = $this->request->get('delivery_type');
+        $final_recipient_id = $this->request->get('final_recipient_id');
+        $products = Product::getPlaceOrderProducts($contract_id, $pickup_id, $final_recipient_id, $delivery_type);
         return $this->asJson($products);
     }
 
@@ -211,6 +213,7 @@ class PlaceOrderController extends \yii\web\Controller
 
             return $this->redirect('/');
         }
+
         return $this->render('create', [
             'model' => $model,
         ]);

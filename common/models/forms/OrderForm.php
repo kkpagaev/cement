@@ -186,4 +186,14 @@ class OrderForm extends Model
         }
         return $this->_items;
     }
+
+    public function errors()
+    {
+        return [
+            'Order' => $this->_order->errors,
+            'Items' => array_map(function ($item) {
+                return $item->errors;
+            }, $this->_items)
+        ];
+    }
 }

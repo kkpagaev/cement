@@ -12,7 +12,7 @@ $products = (function ($products) {
         $result[$el->c1_id] = $el->title;
     }
     return $result;
-})(Product::getPlaceOrderProducts($model->order->contract_id, $model->order->pickup_address_id));
+})(Product::getPlaceOrderProducts($model->order->contract_id, $model->order->pickup_address_id, $model->scenario));
 
 $wagonTypes = (function () {
     $arr = WagonType::find()->all();

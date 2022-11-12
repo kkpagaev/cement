@@ -186,14 +186,8 @@ $this->title = 'Кривий Ріг цемент';
                                         <div class="project-details">
                                             <div class="project-info">
                                                 <p>
-                                                    <?php if ($order->delivery_type == 0) : ?>
-                                                        <?php echo $order->shippingAdress->address_auto ?>
-                                                    <?php elseif ($order->delivery_type == 1) : ?>
-                                                        <?php echo $order->pickupAddress->address ?>
-                                                    <?php else : ?>
-                                                        <?php echo $order->shippingAdress->addressStation->fullname ?>
+                                                    <?= $order->deliveryPoint ?>
 
-                                                    <?php endif; ?></p>
                                                 <p></p>
                                             </div>
                                         </div>

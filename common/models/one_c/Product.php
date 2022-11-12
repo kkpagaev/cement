@@ -2,8 +2,11 @@
 
 namespace common\models\one_c;
 
+use common\models\forms\OrderForm;
 use common\services\one_c\models\Bridgeable1CActiveRecord;
+use GuzzleHttp\Psr7\Query;
 use Yii;
+use yii\db\Query as DbQuery;
 
 /**
  * This is the model class for table "product".
@@ -61,21 +64,36 @@ class Product extends Bridgeable1CActiveRecord
         return $this->hasMany(OrderItems::class, ['product_id' => 'id']);
     }
 
-    public static function getPlaceOrderProducts($contract_id = null, $pickup_id = null)
+    public static function getPlaceOrderProducts($contract_id = null, $pickup_id = null, $final_recipient_id = null, $scenario = null)
     {
-        if ($contract_id == null) {
+
+        if ($scenario == OrderForm::SCENARIO_RAILWAY) {
+            $sql = "SELECT * FROM `product` 
+            JOIN `final_recipient_product` ON `final_recipient_product`.`product_id` = `product`.`c1_id`
+            JOIN `product_pickup_address` ON `product_pickup_address`.`product_id` = `product`.`c1_id`
+            JOIN `contract_product` on `contract_product`.`product_id` = `product`.`c1_id`
+            WHERE `final_recipient_product`.`final_recipient_id` = :final_recipient_id
+            AND `product_pickup_address`.`pickup_address_id` = :pickup_id
+            AND `contract_product`.`contract_id` = :cont_id;";
+
+            return Product::findBySql($sql, [
+                ':final_recipient_id' => $final_recipient_id,
+                ':cont_id' => $contract_id,
+                ':pickup_id' => $pickup_id,
+            ])->all();
+        } else if ($contract_id == null) {
             return [];
-        }
-        $sql = "SELECT * FROM `product` WHERE `c1_id` IN (
+        } else {
+            $sql = "SELECT * FROM `product` WHERE `c1_id` IN (
                 SELECT `product_id` FROM `product_pickup_address` 
                 WHERE `product_id` IN (SELECT `product_id` FROM `contract_product` WHERE `contract_id` = :cont_id)
                 AND `pickup_address_id` = :pickup_id); 
             );
-        ";
-        $products = Product::findBySql($sql, [
-            ':cont_id' => $contract_id,
-            ':pickup_id' => $pickup_id
-        ])->all();
-        return $products;
+            ";
+            return Product::findBySql($sql, [
+                ':cont_id' => $contract_id,
+                ':pickup_id' => $pickup_id,
+            ])->all();
+        }
     }
 }

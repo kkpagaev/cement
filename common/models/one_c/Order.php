@@ -59,7 +59,7 @@ class Order extends Bridgeable1CActiveRecord
         return [
             [['user_id', 'delivery_type', 'contract_id'], 'required'],
             [['status', 'delivery_type', 'invoice_needed'], 'integer'],
-            [['invoice_needed'], 'default', 'value'=> 0],
+            [['invoice_needed'], 'default', 'value' => 0],
 
             [['user_id', 'contract_id', 'pickup_address_id', 'shipping_address_id', 'final_recipient_id', 'consignee_id'], 'string', 'min' => 1,],
             [['consignee_fullname'], 'string', 'min' => 5, 'max' => 255],
@@ -76,15 +76,16 @@ class Order extends Bridgeable1CActiveRecord
                 'consignee_phone',
                 // 'final_recipient_id'
             ], 'required', 'on' => self::SCENARIO_AUTO],
-            [['consignee_phone'], 'string', 'min' => 9, 'max'=> 32],
+            [['consignee_phone'], 'string', 'min' => 9, 'max' => 32],
             [[
                 'contract_id',
-                'shipping_address_id',
+                // 'shipping_address_id',
                 'pickup_address_id',
-                'consignee_id',
+                // 'consignee_id',
                 'consignee_code',
                 'consignee_branch',
-                'column_7',], 'required', 'on' => self::SCENARIO_RAILWAY],
+                'column_7',
+            ], 'required', 'on' => self::SCENARIO_RAILWAY],
             [[
                 'contract_id',
                 'pickup_address_id',
@@ -126,12 +127,14 @@ class Order extends Bridgeable1CActiveRecord
             ],
             self::SCENARIO_RAILWAY => [
                 'contract_id',
-                'shipping_address_id',
+                // 'shipping_address_id',
                 'pickup_address_id',
-                'consignee_id',
+                // 'consignee_id',
+                'final_recipient_id',
                 'consignee_code',
                 'consignee_branch',
-                'column_7',]
+                'column_7',
+            ]
         ]);
     }
 
@@ -193,6 +196,22 @@ class Order extends Bridgeable1CActiveRecord
         return $this->hasOne(FinalRecipient::class, ['id' => 'final_recipient_id']);
     }
 
+
+    public function getDeliveryPoint()
+    {
+        $deliveryType = $this->delivery_type;
+        if ($deliveryType == self::SCENARIO_AUTO) {
+            return $this->shippingAdress->address_auto;
+        }
+        if ($deliveryType == self::SCENARIO_SELF_PICKUP) {
+            return $this->pickupAddress->address;
+        }
+        if ($deliveryType == self::SCENARIO_RAILWAY) {
+            //   return $order->shippingAdress->addressStation->fullname;
+            return $this->pickupAddress->address;
+        }
+        return '';
+    }
     /**
      * Gets query for [[OrderItems]].
      *
@@ -209,7 +228,8 @@ class Order extends Bridgeable1CActiveRecord
         return $data;
     }
 
-    public function productsPreview() {
+    public function productsPreview()
+    {
         $result = '';
         $products = OrderItems::find()->where(['order_id' => $this->id])->with('product')->all();
         foreach ($products as $product) {
@@ -218,7 +238,6 @@ class Order extends Bridgeable1CActiveRecord
         $result[0] = ' ';
 
         return $result;
-
     }
     /**
      * Gets query for [[PickupAddress]].

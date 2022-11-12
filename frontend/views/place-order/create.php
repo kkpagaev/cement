@@ -12,14 +12,6 @@ use yii\widgets\ActiveForm;
 /* @var $pickupAddresses array */
 /* @var $recipients array */
 
-$products = (function ($products) {
-    $result = [];
-    foreach ($products as $el) {
-        $result[$el->c1_id] = $el->title;
-    }
-    return $result;
-})(Product::getPlaceOrderProducts($model->order->contract_id, $model->order->pickup_address_id));
-
 $this->title = 'Розмістини заявку';
 ?>
 
@@ -67,19 +59,37 @@ $model->errorSummary($form);
                     ]);
                     ?>
 
-                    <?php
-                    echo $this->render('_order-details', [
-                        'model' => $model,
-                        'form' => $form,
-                    ]);
-                    ?>
+                    <?php if ($model->scenario == OrderForm::SCENARIO_RAILWAY) : ?>
 
-                    <?php
-                    echo $this->render('_shipping-details', [
-                        'model' => $model,
-                        'form' => $form,
-                    ]);
-                    ?>
+                        <?php
+                        echo $this->render('_shipping-details', [
+                            'model' => $model,
+                            'form' => $form,
+                        ]);
+                        ?>
+                        <?php
+                        echo $this->render('_order-details', [
+                            'model' => $model,
+                            'form' => $form,
+                        ]);
+                        ?>
+
+
+                    <?php else : ?>
+                        <?php
+                        echo $this->render('_order-details', [
+                            'model' => $model,
+                            'form' => $form,
+                        ]);
+                        ?>
+
+                        <?php
+                        echo $this->render('_shipping-details', [
+                            'model' => $model,
+                            'form' => $form,
+                        ]);
+                        ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
