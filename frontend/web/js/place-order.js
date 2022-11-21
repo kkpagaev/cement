@@ -106,8 +106,8 @@ function addOrderItem() {
 }
 
 function fillShippingAddress(contractId, pickup_address_id) {
-    let delivery_type = $("#delivery_type").val();
-    $.get("/place-order/get-shipping?contract_id=" + contractId + "&delivery_type=" + delivery_type + "&pickup_address_id="+pickup_address_id, function (data) {
+    let delivery_type = $("#delivery_type").val() == 0 ? 0 : 1;
+    $.get("/place-order/get-shipping?contract_id=" + contractId+ "&pickup_address_id="+pickup_address_id + "&delivery_type=" + delivery_type , function (data) {
         filShippingAddresses(data);
     });
 }

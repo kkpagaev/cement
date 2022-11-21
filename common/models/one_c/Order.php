@@ -79,7 +79,7 @@ class Order extends Bridgeable1CActiveRecord
             [['consignee_phone'], 'string', 'min' => 9, 'max' => 32],
             [[
                 'contract_id',
-                // 'shipping_address_id',
+                'shipping_address_id',
                 'pickup_address_id',
                 // 'consignee_id',
                 'consignee_code',
@@ -127,7 +127,7 @@ class Order extends Bridgeable1CActiveRecord
             ],
             self::SCENARIO_RAILWAY => [
                 'contract_id',
-                // 'shipping_address_id',
+                'shipping_address_id',
                 'pickup_address_id',
                 // 'consignee_id',
                 'final_recipient_id',
@@ -207,8 +207,8 @@ class Order extends Bridgeable1CActiveRecord
             return $this->pickupAddress->address;
         }
         if ($deliveryType == self::SCENARIO_RAILWAY) {
-            //   return $order->shippingAdress->addressStation->fullname;
-            return $this->pickupAddress->address;
+              return $this->shippingAdress->addressStation->fullname;
+            // return $this->pickupAddress->address;
         }
         return '';
     }

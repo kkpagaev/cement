@@ -68,7 +68,7 @@ class Product extends Bridgeable1CActiveRecord
     {
 
         if ($scenario == OrderForm::SCENARIO_RAILWAY) {
-            $sql = "SELECT * FROM `product` 
+            $sql = "SELECT *,  `product`.`c1_id` AS `c1_id` FROM `product` 
             JOIN `final_recipient_product` ON `final_recipient_product`.`product_id` = `product`.`c1_id`
             JOIN `product_pickup_address` ON `product_pickup_address`.`product_id` = `product`.`c1_id`
             JOIN `contract_product` on `contract_product`.`product_id` = `product`.`c1_id`

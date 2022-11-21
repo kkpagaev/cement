@@ -35,7 +35,7 @@ class PlaceOrderController extends \yii\web\Controller
         $shipping = ShippingAddress::findBySql($sql, [
             ':cont_id' => $contract_id,
             ':pickup_id' => $pickup_id,
-            ':delivery_type' => $deliveryType
+            ':delivery_type' => $deliveryType 
         ])->all();
         $result = [];
         if ($deliveryType == ShippingAddress::DELIVERY_TYPE_AUTO) {
